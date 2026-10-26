@@ -1,0 +1,10 @@
+type: custom:white-ghosts-card
+title: Domowy pomocnik
+character: robot
+corner: random
+duration: 10
+size: 180
+interval_min: 2
+interval_max: 2
+schedule_start: "06:00"
+schedule_end: "22:00"
