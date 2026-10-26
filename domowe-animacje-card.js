@@ -1,4 +1,4 @@
-/* Domowe Animacje 1.2.0. Original code and SVG artwork. MIT license. */
+/* Domowe Animacje 1.2.1. Original code and SVG artwork. MIT license. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
@@ -103,34 +103,103 @@
   `;
   const CHARACTERS = ['ghosts','robot','santa','bunny','butterflies','cars'];
   const LABELS = {ghosts:'Białe duszki',robot:'Machający robocik',santa:'Mikołaj z saniami',bunny:'Wielkanocny króliczek',butterflies:'Motylki',cars:'Wyścigówki',random:'Losowo z wybranych'};
+  let sleighArtworkId = 0;
   function santaSVG() {
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220" fill="none">
-      <g fill="#ffe7a0"><path d="m13 107 3 7 8 2-8 3-3 7-3-7-8-3 8-2Z"/><path d="m39 77 2 5 6 2-6 2-2 6-2-6-6-2 6-2Z"/><circle cx="17" cy="150" r="3"/><circle cx="42" cy="167" r="2"/><circle cx="5" cy="73" r="2"/></g>
-      <path d="M235 144q48-18 104-18" stroke="#e3b867" stroke-width="3"/>
-      <path d="M72 166v22m137-22v22M48 186h180q17 0 18-17" stroke="#e5bd60" stroke-width="9" stroke-linecap="round"/>
-      <path d="M43 121h157q18-4 21-24h15v39q0 36-37 36H87q-40-2-44-51Z" fill="#b52646"/>
-      <path d="M46 122h155q10-2 15-9v25q-1 25-26 25H86q-28-1-40-41Z" fill="#ee4960"/>
-      <path d="M59 142h120" stroke="#ffb36c" stroke-width="4" stroke-linecap="round"/><circle cx="197" cy="144" r="7" fill="#f4d17f"/>
-      <rect x="59" y="94" width="35" height="31" rx="4" fill="#21afa9"/><path d="M76 94v31M59 107h35" stroke="#ffe6a2" stroke-width="5"/>
-      <rect x="94" y="102" width="28" height="23" rx="3" fill="#8a72d7"/><path d="M108 102v23" stroke="#f2c96e" stroke-width="4"/>
-      <path d="M123 125v-23q0-20 24-21 26 0 28 23v21" fill="#d9324e"/>
-      <rect x="122" y="113" width="55" height="9" rx="3" fill="#273348"/><rect x="143" y="111" width="13" height="13" rx="2" fill="#f5cf70"/>
-      <circle cx="150" cy="67" r="24" fill="#ffd9b5"/>
-      <path d="M126 67q1 43 25 36 24-8 22-37-7 12-17 7-11 5-30-6Z" fill="#fff8ee"/>
-      <circle cx="140" cy="64" r="2.3" fill="#263248"/><circle cx="157" cy="64" r="2.3" fill="#263248"/><ellipse cx="149" cy="73" rx="7" ry="5" fill="#f6ac91"/>
-      <path d="M123 49q7-37 35-29l23 24-26-10-7 15" fill="#e43e56"/><path d="M125 49h46" stroke="#fff8ee" stroke-width="10" stroke-linecap="round"/><circle cx="183" cy="44" r="8" fill="#fff8ee"/>
-      <g class="santa-wave"><path d="M172 99q20-5 22-22" stroke="#d9324e" stroke-width="12" stroke-linecap="round"/><circle cx="195" cy="72" r="8" fill="#fff8ee"/></g>
-      <g class="reindeer-legs"><path d="m362 142-15 29 12 13m33-42 14 28 17 9m-5-40 18 20 14 3" stroke="#b8784c" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="m351 184 10 1m61-6 8 2m17-19 8 2" stroke="#654b41" stroke-width="7" stroke-linecap="round"/></g>
-      <ellipse cx="390" cy="129" rx="47" ry="25" fill="#c98b57"/><path d="m421 125 20-45 22 6-13 42" fill="#c98b57"/>
-      <path d="m347 121-15-12" stroke="#c98b57" stroke-width="10" stroke-linecap="round"/>
-      <ellipse cx="456" cy="82" rx="27" ry="19" fill="#d99c65"/><ellipse cx="477" cy="87" rx="11" ry="9" fill="#ee4b5c"/>
-      <circle cx="459" cy="77" r="3" fill="#243246"/><circle cx="460" cy="76" r="1" fill="white"/>
-      <path d="m439 66-4-16m4 8-10-3m8-1 7-9m7 21 4-18m-1 7 8-7" stroke="#865d43" stroke-width="5" stroke-linecap="round"/>
-      <path d="m443 73-14-5" stroke="#d99c65" stroke-width="9" stroke-linecap="round"/>
-      <path d="m433 103 22 8" stroke="#dc3b50" stroke-width="7"/><circle cx="446" cy="112" r="5" fill="#ffd479"/>
-      <path d="M369 107v45" stroke="#e6bb60" stroke-width="5"/><path d="M344 133h89" stroke="#aa443f" stroke-width="4"/>
+    const id = 'domowe-sleigh-'+(++sleighArtworkId);
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" fill="none">
+      <defs>
+        <linearGradient id="${id}-coat" x1="188" y1="135" x2="280" y2="209" gradientUnits="userSpaceOnUse"><stop stop-color="#f35a5e"/><stop offset=".55" stop-color="#d83348"/><stop offset="1" stop-color="#a51e38"/></linearGradient>
+        <linearGradient id="${id}-sleigh" x1="112" y1="175" x2="313" y2="253" gradientUnits="userSpaceOnUse"><stop stop-color="#ed5261"/><stop offset=".58" stop-color="#d9344d"/><stop offset="1" stop-color="#a51f3d"/></linearGradient>
+        <linearGradient id="${id}-fur" x1="192" y1="88" x2="250" y2="147" gradientUnits="userSpaceOnUse"><stop stop-color="#fffdf5"/><stop offset="1" stop-color="#e5e5df"/></linearGradient>
+        <linearGradient id="${id}-deer" x1="553" y1="147" x2="644" y2="218" gradientUnits="userSpaceOnUse"><stop stop-color="#cf9a64"/><stop offset=".55" stop-color="#b97946"/><stop offset="1" stop-color="#925b37"/></linearGradient>
+        <linearGradient id="${id}-gold" x1="70" y1="219" x2="329" y2="275" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe8a0"/><stop offset=".5" stop-color="#dcab4f"/><stop offset="1" stop-color="#f8d77d"/></linearGradient>
+        <radialGradient id="${id}-nose" cx=".3" cy=".25" r=".8"><stop stop-color="#ff8b80"/><stop offset=".4" stop-color="#eb534f"/><stop offset="1" stop-color="#bd303c"/></radialGradient>
+      </defs>
+      <g fill="#ffe4a1"><path d="m33 181 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m56 130 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/><circle cx="17" cy="146" r="2.4"/><circle cx="22" cy="218" r="2.7"/><circle cx="52" cy="235" r="1.8"/></g>
+      <path d="M297 165C372 174 434 164 507 165M297 172C373 186 441 177 509 173" stroke="#bd8846" stroke-width="3" stroke-linecap="round"/>
+      <path d="M297 164C372 173 434 163 507 164" stroke="#f3d495" stroke-width="1.3" stroke-linecap="round"/>
+      <g class="sleigh-vehicle">
+        <path d="M114 234v32m188-34v34" stroke="#bc873b" stroke-width="9" stroke-linecap="round"/>
+        <path d="M77 266h258q30 0 31-28" stroke="url(#${id}-gold)" stroke-width="11" stroke-linecap="round"/>
+        <path d="M81 263h248q23 0 25-14" stroke="#fff0b8" stroke-width="2.1" stroke-linecap="round" opacity=".7"/>
+        <path d="M155 177q-31-12-21-43 2-12 19-20l-5-12 19-4 9 15q26 17 22 40l-4 27Z" fill="#997a43"/><path d="m148 111 28-6" stroke="#e0b963" stroke-width="5" stroke-linecap="round"/>
+        <rect x="86" y="147" width="49" height="46" rx="5" fill="#38ad9e"/><path d="M109 147v46M86 163h49" stroke="#ffe7a8" stroke-width="7"/>
+        <path d="M108 147q-19-17-20-4 0 8 20 4 19-19 22-7 1 9-22 7Z" fill="#ffe7a8"/>
+        <rect x="130" y="158" width="38" height="36" rx="4" fill="#9a79c8"/><path d="M148 158v36M130 172h38" stroke="#efc77d" stroke-width="5"/>
+        <g class="santa-body">
+          <path d="M190 180q-7-40 34-47 45-5 58 42l-9 33h-81Z" fill="url(#${id}-coat)" stroke="#a52d3c" stroke-width="2"/>
+          <path d="M207 143q-11 13-10 29" stroke="#ff9d91" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+          <path d="M232 146v55" stroke="url(#${id}-fur)" stroke-width="13" stroke-linecap="round"/>
+          <path d="M191 180q41 9 88-2l-2 17q-43 10-87-1Z" fill="#3c3438"/>
+          <rect x="227" y="179" width="25" height="20" rx="4" fill="url(#${id}-gold)"/><rect x="233" y="184" width="13" height="10" rx="1.5" fill="#4c3d35"/>
+          <path d="M255 164q16 15 34 7" stroke="#bc293d" stroke-width="20" stroke-linecap="round"/>
+          <path d="m280 175 5-17" stroke="#f8f2e7" stroke-width="10" stroke-linecap="round"/><path d="M289 169q11-9 16-2-1 9-15 11" fill="#f2dfbd"/>
+          <g class="santa-wave">
+            <path d="M270 156q29-3 34-34" stroke="#bc293d" stroke-width="21" stroke-linecap="round"/>
+            <path d="M271 153q24-4 27-29" stroke="#eb4a54" stroke-width="12" stroke-linecap="round"/>
+            <path d="m294 124 19 3" stroke="#fff5e8" stroke-width="11" stroke-linecap="round"/>
+            <path d="M299 121q-6-14-1-23 4-9 8-1l1 8q9-10 14-3 6 10-7 24Z" fill="#fff9ef" stroke="#e0dfd5" stroke-width="1.6"/>
+          </g>
+          <ellipse cx="224" cy="93" rx="35" ry="38" fill="#f5c5a2"/>
+          <ellipse cx="192" cy="96" rx="7" ry="10" fill="#efb08e"/><ellipse cx="257" cy="97" rx="7" ry="10" fill="#efb08e"/>
+          <path d="M193 90q-1 18 12 30l-3 15q21 18 44-1l-3-17q14-10 13-25-2 28-31 27-27-1-32-29Z" fill="url(#${id}-fur)"/>
+          <path d="M196 105q-12 12-1 25-2 13 12 17 7 13 20 9 13 3 20-9 15-4 11-17 9-13 0-24-9 27-31 25-22 1-31-26Z" fill="url(#${id}-fur)"/>
+          <path d="M210 137q15 11 29-1" stroke="#d8d8d1" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+          <path d="M205 90q5-4 11 0m18 0q6-4 11 1" stroke="#fffcf1" stroke-width="4.5" stroke-linecap="round"/>
+          <ellipse cx="212" cy="98" rx="3.2" ry="4" fill="#3e3540"/><ellipse cx="239" cy="99" rx="3.2" ry="4" fill="#3e3540"/>
+          <circle cx="213" cy="97" r="1" fill="white"/><circle cx="240" cy="98" r="1" fill="white"/>
+          <ellipse cx="202" cy="108" rx="7" ry="4.5" fill="#ee9e8e" opacity=".75"/><ellipse cx="249" cy="109" rx="6" ry="4" fill="#ee9e8e" opacity=".75"/>
+          <ellipse cx="226" cy="110" rx="9" ry="6.5" fill="#eea68b"/>
+          <path d="M225 116q-10-6-19 4 7 7 20-1 12 8 21 0-12-9-22-3Z" fill="#fffaf0"/>
+          <path d="M220 123q7 7 14-1" stroke="#a65b5a" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M186 79C188 53 199 30 225 29c22-1 37 15 45 34l13 13-13 12c-24-10-55-11-84-9Z" fill="#c83349" stroke="#a92b3f" stroke-width="1.8"/>
+          <path d="M195 65q8-28 30-29 18-1 32 18" stroke="#ef6870" stroke-width="6" stroke-linecap="round" opacity=".75"/>
+          <path d="M187 80q38-7 79 4" stroke="#f8f5eb" stroke-width="15" stroke-linecap="round"/>
+          <path d="M190 78q35-4 71 4" stroke="#fffdf5" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="286" cy="76" r="12" fill="#eeeae0"/><circle cx="283" cy="72" r="9" fill="#fffaf0"/>
+        </g>
+        <path d="M68 186h231q33-1 37-35h22v54q-2 43-57 47H130q-53-2-62-66Z" fill="#9f2340" stroke="#8d263e" stroke-width="2.2"/>
+        <path d="M75 191h222q29-1 44-25v39q-2 36-44 38H129q-44-1-54-52Z" fill="url(#${id}-sleigh)"/>
+        <path d="M78 190h220q32-2 42-29" stroke="url(#${id}-gold)" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="M103 218h144" stroke="#f4c76e" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="m148 211 2 5 6 2-6 2-2 5-2-5-6-2 6-2Z" fill="#ffe3a0"/>
+        <path d="M285 225q22-3 22-19-1-10-10-8-8 3-4 10" stroke="#f7d280" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M86 199q5 20 15 27" stroke="#ff9f98" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+      </g>
+      <g class="reindeer-legs">
+        <g class="reindeer-leg reindeer-hind-far"><path d="M553 195q-9 22 1 36l-22 12" stroke="#8d5d3d" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><path d="m531 240-1 10 16 1 2-7" fill="#4e3931"/></g>
+        <g class="reindeer-leg reindeer-front-far"><path d="M619 196q20 18 11 35l24 9" stroke="#8d5d3d" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="m650 236-3 9 17 4 3-8" fill="#4e3931"/></g>
+      </g>
+      <path class="reindeer-tail" d="M529 178q-23 5-24-17 12-1 26 13Z" fill="#b87d4f" stroke="#8e603d" stroke-width="2"/>
+      <path d="M526 174q6-29 47-31 45-2 66 23 7 31-13 43-29 20-73 1-29-11-27-36Z" fill="url(#${id}-deer)" stroke="#8d5e3d" stroke-width="2.4"/>
+      <path d="M537 162q22-14 50-10" stroke="#e1b580" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+      <path d="M557 200q31 13 60-1-15 21-40 16Z" fill="#ddb88a"/>
+      <path d="M631 178C641 158 641 137 650 122c3-7 8-10 14-9l14 24c-5 17-11 37-22 54-7 10-16 11-23 2Z" fill="url(#${id}-deer)" stroke="#8d5e3d" stroke-width="2.4"/>
+      <path d="M667 146c7 4 4 14 0 23-5 13-11 23-18 28l-8-6c12-13 17-28 19-42Z" fill="#efd3ac"/>
+      <g class="reindeer-legs">
+        <g class="reindeer-leg reindeer-hind-near"><path d="M549 198q-3 18-19 29l23 22" stroke="#8d5d3d" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/><path d="M549 197q-3 18-19 29l23 22" stroke="#bf8653" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><path d="m548 245 1 12 20-1-3-9Z" fill="#5b4033"/><path d="m554 247 5 7" stroke="#8e7057" stroke-width="2"/></g>
+        <g class="reindeer-leg reindeer-front-near"><path d="M629 195q-2 20 18 29l-8 25" stroke="#8d5d3d" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><path d="M629 195q-2 20 18 29l-8 25" stroke="#c58c58" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="m635 245-2 12 21 3 1-10Z" fill="#5b4033"/><path d="m642 249 4 7" stroke="#8e7057" stroke-width="2"/></g>
+      </g>
+      <path d="M654 117q-23-1-36-23 25-6 49 13Z" fill="#b27b4c" stroke="#8d5e3d" stroke-width="2.2"/><path d="m630 99 25 12" stroke="#e7bc91" stroke-width="5" stroke-linecap="round"/>
+      <path d="M680 107q3-22 30-28-1 23-20 36Z" fill="#bd8855" stroke="#8d5e3d" stroke-width="2.2"/><path d="m696 91-9 17" stroke="#e7bc91" stroke-width="5" stroke-linecap="round"/>
+      <path d="M666 105q-13-19-12-42 1-26-9-42m9 43-21-14-5-15m26 12 13-15m-12 47-23-8-9-13" stroke="#76533d" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M685 103q9-20 9-43 0-26 11-41m-11 42 21-14 7-15m-26 13-11-14m5 51 22-9 9-13" stroke="#8c603d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M684 94q6-16 7-33m6-5 15-10" stroke="#bb9468" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+      <path d="M654 113q17-21 42-6l16 17q30 3 32 19-1 19-27 18l-26-10q-23 8-35-8-8-13-2-30Z" fill="#c28c59" stroke="#8d5e3d" stroke-width="2.4"/>
+      <path d="M661 116q11-11 25-7" stroke="#e2b886" stroke-width="4" stroke-linecap="round"/>
+      <path d="M709 131q20-3 31 5 11 21-18 23l-20-8Z" fill="#e9c59b"/>
+      <ellipse cx="739" cy="141" rx="11.5" ry="10" fill="url(#${id}-nose)"/><ellipse cx="736" cy="137" rx="4" ry="2.6" fill="#ffd2bd" opacity=".75"/>
+      <ellipse cx="684" cy="125" rx="6" ry="8" fill="#f6e8d2"/><ellipse cx="686" cy="126" rx="4.3" ry="6.5" fill="#342a2a"/><circle cx="687" cy="123.5" r="1.9" fill="white"/>
+      <path d="M680 113q5-4 10 1" stroke="#81543c" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="691" cy="143" rx="7" ry="3.5" fill="#d99a7a" opacity=".5"/>
+      <path d="M718 151q9 5 17-1" stroke="#87533e" stroke-width="2" stroke-linecap="round"/>
+      <path d="M649 151q10 8 23 8l-4 10q-12-1-23-8Z" fill="#c52d42" stroke="#a22537" stroke-width="1.6"/>
+      <circle cx="659" cy="169" r="6" fill="url(#${id}-gold)" stroke="#c3984a" stroke-width="1.2"/><path d="m656 171 6-1" stroke="#936e36" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M552 151q-7 27 1 57" stroke="#8e4438" stroke-width="8"/><path d="M551 152q-6 25 1 54" stroke="#d2a162" stroke-width="4"/>
+      <path d="M508 165q51 17 121 5" stroke="#87523b" stroke-width="4" stroke-linecap="round"/><circle cx="555" cy="174" r="5" fill="#e7bd6d"/>
     </svg>`;
   }
+
   function bunnySVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" fill="none">
       <ellipse cx="106" cy="232" rx="76" ry="8" fill="#2c455e" opacity=".12"/>
@@ -191,16 +260,23 @@
     .ghosts .art { animation:ghost-float 2.8s ease-in-out infinite alternate; }
     @keyframes ghost-float { from{transform:translateY(-9px) rotate(-6deg)} to{transform:translateY(9px) rotate(6deg)} }
     .santa .art { animation:festive-float 2.5s ease-in-out infinite; }
-    .santa-wave { transform-origin:172px 99px;animation:santa-hello .9s ease-in-out infinite alternate; }
-    .reindeer-legs { transform-origin:390px 132px;animation:reindeer-gallop .55s ease-in-out infinite alternate; }
+    .santa-wave { transform-origin:270px 156px;animation:santa-hello 1.1s ease-in-out infinite alternate; }
+    .reindeer-leg { transform-box:view-box; }
+    .reindeer-hind-near { transform-origin:549px 198px;animation:reindeer-stride-a .7s ease-in-out infinite alternate; }
+    .reindeer-front-near { transform-origin:629px 195px;animation:reindeer-stride-b .7s ease-in-out infinite alternate; }
+    .reindeer-hind-far { transform-origin:553px 195px;animation:reindeer-stride-b .7s ease-in-out infinite alternate; }
+    .reindeer-front-far { transform-origin:619px 196px;animation:reindeer-stride-a .7s ease-in-out infinite alternate; }
+    .reindeer-tail { transform-origin:529px 178px;animation:reindeer-tail .9s ease-in-out infinite alternate; }
     .bunny .art { animation:bunny-hop .85s ease-in-out infinite; }
     .bunny-ears { transform-origin:105px 100px;animation:bunny-ears .85s ease-in-out infinite; }
     .butterflies .wing-left,.butterflies .wing-right { transform-origin:90px 84px;animation:butterfly-flap .24s ease-in-out infinite alternate; }
     .cars .art { animation:car-suspension .2s ease-in-out infinite alternate; }
     .car-wheel { transform-box:fill-box;transform-origin:center;animation:car-wheel .32s linear infinite; }
-    @keyframes festive-float { 0%,100% {transform:translateY(-6px) rotate(-2deg)} 50% {transform:translateY(6px) rotate(2deg)} }
-    @keyframes santa-hello { from{transform:rotate(-8deg)} to{transform:rotate(18deg)} }
-    @keyframes reindeer-gallop { from{transform:rotate(-10deg)} to{transform:rotate(12deg)} }
+    @keyframes festive-float { 0%,100% {transform:translateY(-4px) rotate(-.65deg)} 50% {transform:translateY(4px) rotate(.65deg)} }
+    @keyframes santa-hello { from{transform:rotate(-7deg)} to{transform:rotate(9deg)} }
+    @keyframes reindeer-stride-a { from{transform:rotate(-13deg)} to{transform:rotate(15deg)} }
+    @keyframes reindeer-stride-b { from{transform:rotate(13deg)} to{transform:rotate(-15deg)} }
+    @keyframes reindeer-tail { from{transform:rotate(-5deg)} to{transform:rotate(8deg)} }
     @keyframes bunny-hop { 0%,100%{transform:translateY(0) scale(1.03,.97)} 50%{transform:translateY(-28px) scale(.98,1.02)} }
     @keyframes bunny-ears { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(6deg)} }
     @keyframes butterfly-flap { from{transform:scaleX(.22)} to{transform:scaleX(1)} }
@@ -211,9 +287,9 @@
   function planScene(config,width,height,reduced=false,random=Math.random) {
     const kind = config.character;
     const count = ['ghosts','butterflies','cars'].includes(kind) ? config.ghosts : 1;
-    const ratio = {ghosts:172/150,santa:220/520,bunny:250/220,butterflies:160/180,cars:145/300}[kind];
+    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:145/300}[kind];
     const reverse = config.direction === 'right-to-left' || (config.direction === 'random' && random()>.5);
-    const scale = {ghosts:1,santa:2.6,bunny:1.05,butterflies:.7,cars:1.55}[kind];
+    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55}[kind];
     const airborne = ['ghosts','santa','butterflies'].includes(kind);
     const items = [];
     for(let i=0;i<count;i++) {
