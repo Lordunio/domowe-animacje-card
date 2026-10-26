@@ -1,53 +1,29 @@
-# Instalacja przez HACS
+# Pierwsza instalacja Domowych Animacji przez HACS
 
-Paczka zawiera manifest `hacs.json` i plik `white-ghosts-card.js` w katalogu głównym. Jest przygotowana do publikacji jako repozytorium niestandardowe typu **Dashboard**. HACS pobiera pliki z publicznego repozytorium GitHub; nie przyjmuje lokalnego pliku ZIP jako adresu repozytorium.
+Jeśli masz już white-ghosts-card, użyj instrukcji aktualizacji w README. Nowe repozytorium nie jest potrzebne.
 
-## 1. Jednorazowa publikacja na GitHubie
-
-1. Zaloguj się na GitHub i utwórz **publiczne** repozytorium o nazwie **white-ghosts-card**.
-2. Dodaj opis, np. `Animated white ghosts for Home Assistant dashboards`, oraz tematy `home-assistant`, `hacs`, `lovelace`, `custom-card`.
-3. Rozpakuj paczkę ZIP. Wgraj **zawartość** katalogu `white-ghosts-card` do katalogu głównego repozytorium. Nie wgrywaj samego ZIP-a ani dodatkowego katalogu nadrzędnego.
-4. Zapisz pliki (Commit changes) na domyślnej gałęzi. Na początek wydanie GitHub Release nie jest potrzebne.
-
-Struktura na GitHubie:
-
-```text
-white-ghosts-card/
-├── hacs.json
-├── white-ghosts-card.js
-├── README.md
-├── INSTALL-HACS.md
-├── LICENSE
-├── example.yaml
-└── podglad.html
-```
-
-Nazwa repozytorium i pliku JavaScript są celowo takie same. Paczka nie publikuje się automatycznie. Nie jest jeszcze dodana do domyślnego katalogu HACS.
-
-## 2. Dodanie w Home Assistant
-
-1. W HACS wybierz menu **⋮ → Repozytoria niestandardowe / Custom repositories**.
-2. Wklej adres utworzonego repozytorium, w formie `https://github.com/TWOJ_LOGIN/white-ghosts-card` — zastąp `TWOJ_LOGIN` rzeczywistym loginem.
-3. Wybierz typ **Dashboard** (w starszych interfejsach: Lovelace / Plugin), a następnie **Dodaj**.
-4. Odszukaj **Białe duszki — White Ghosts Card** i wybierz **Pobierz / Download**.
-5. Odśwież stronę Home Assistanta.
-6. Sprawdź zasoby pulpitu. Jeśli HACS nie zarejestrował zasobu automatycznie, dodaj adres `/hacsfiles/white-ghosts-card/white-ghosts-card.js` jako **Moduł JavaScript**.
-7. Dodaj ręcznie kartę na pulpicie:
+1. Utwórz publiczne repozytorium GitHub o nazwie **white-ghosts-card**. Dodaj opis `Domowe Animacje — animated characters for Home Assistant` i tematy `home-assistant`, `hacs`, `lovelace`, `custom-card`.
+2. Wgraj zawartość tego katalogu do katalogu głównego repozytorium. Pliki `hacs.json` i `white-ghosts-card.js` muszą być widoczne bezpośrednio po wejściu do repozytorium. Nie wgrywaj samego ZIP-a ani dodatkowego folderu nadrzędnego.
+3. Zatwierdź zmiany. Wydanie GitHub Release nie jest potrzebne do pierwszej instalacji z domyślnej gałęzi.
+4. W Home Assistant otwórz **HACS → ⋮ → Repozytoria niestandardowe**. Dodaj rzeczywisty adres repozytorium, typ **Dashboard**.
+5. Odszukaj **Domowe Animacje** i wybierz **Pobierz / Download**.
+6. Odśwież interfejs Home Assistanta. Jeżeli zasób nie został dodany automatycznie, w zasobach pulpitu dodaj `/hacsfiles/white-ghosts-card/white-ghosts-card.js` jako **Moduł JavaScript**.
+7. Dodaj ręcznie kartę:
 
 ```yaml
-type: custom:white-ghosts-card
+type: custom:domowe-animacje-card
 ```
 
-Kliknij **Pokaż duszki**, aby przetestować animację. Przycisk **Włącz przeloty** uruchamia harmonogram.
+8. Rozwiń **Ustawienia**, wybierz scenę i godziny, kliknij **Zapisz ustawienia**, a następnie **Pokaż teraz** oraz **Włącz animacje**.
 
-## Przejście z instalacji ręcznej
+Do ręcznej instalacji skopiuj plik JavaScript do `/config/www/white-ghosts-card/white-ghosts-card.js` i dodaj zasób `/local/white-ghosts-card/white-ghosts-card.js?v=1.2.0` jako moduł JavaScript. Nie ładuj jednocześnie kopii ręcznej i kopii z HACS.
 
-Jeśli wcześniej dodano zasób `/local/white-ghosts-card/white-ghosts-card.js`, usuń jego wpis z zasobów po instalacji przez HACS. Pozostaw jeden zasób tej karty, z adresem `/hacsfiles/…`, i odśwież przeglądarkę. Konfiguracja YAML karty pozostaje taka sama.
+## Nazwa wyświetlana a adres
 
-## Aktualizacje
+W HACS i wyborze kart dodatek nazywa się **Domowe Animacje**. Nazwa repozytorium i pliku pozostaje `white-ghosts-card`, żeby zachować prostą aktualizację istniejących instalacji i zgodność struktury z HACS. Jeśli później zmienisz adres repozytorium, będzie to osobna migracja, wymagająca aktualizacji ścieżek i konfiguracji HACS.
 
-Wgrywaj nową wersję pliku JavaScript do tego samego repozytorium. Bez wydań HACS śledzi domyślną gałąź. Jeśli zaczniesz publikować wydania GitHub Release, dołączaj do każdego z nich aktualny plik `white-ghosts-card.js` jako zasób wydania. Użytkownicy pobiorą aktualizację przez HACS.
+## Późniejsze aktualizacje
 
-Przygotowanie struktury nie zastępuje próby instalacji: tej paczki nie instalowano jeszcze w działającym HACS ani Home Assistant.
+Wgrywaj nowy plik JavaScript do tego samego repozytorium. Bez wydań HACS śledzi domyślną gałąź. Jeżeli zaczniesz publikować wydania GitHub Release, dołączaj aktualny plik `white-ghosts-card.js` jako zasób każdego wydania.
 
-Dokumentacja HACS: [wymagania ogólne](https://www.hacs.xyz/docs/publish/start/), [karty Dashboard](https://www.hacs.xyz/docs/publish/plugin/), [repozytoria niestandardowe](https://www.hacs.xyz/docs/faq/custom_repositories/).
+Dokumentacja: [struktura kart HACS](https://www.hacs.xyz/docs/publish/plugin/), [manifest](https://www.hacs.xyz/docs/publish/start/), [repozytoria niestandardowe](https://www.hacs.xyz/docs/faq/custom_repositories/).

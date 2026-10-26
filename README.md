@@ -1,80 +1,93 @@
-# Duszki i domowy pomocnik — wersja 1.1.0
+# Domowe Animacje 1.2.0
 
-Karta Home Assistant z dwiema postaciami: białymi duszkami przelatującymi nad pulpitem lub białym, uśmiechniętym robocikiem z niebieską buźką, domkiem na antenie i machającą ręką. Robocik wysuwa się z rogu, macha, mruga i chowa. Grafika SVG i animacja są częścią pliku JavaScript. Bez bibliotek, filmów, dźwięku i połączeń z Internetem.
+Karta Home Assistant z sześcioma animacjami i ustawieniami na pulpicie. Własne rysunki SVG, bez bibliotek, filmów, dźwięku i połączeń z Internetem.
 
-## Aktualizacja istniejącej instalacji przez HACS
+| Animacja | Zachowanie |
+| --- | --- |
+| Białe duszki | Falują i przelatują przez ekran |
+| Machający robocik | Wysuwa się z wybranego rogu, macha i chowa |
+| Mikołaj z saniami | Przelatuje z reniferem i prezentami; Mikołaj macha |
+| Wielkanocny króliczek | Podskakuje przy dolnej krawędzi, z koszyczkiem pisanek |
+| Motylki | Lecą falującym torem i poruszają skrzydłami; różne kolory |
+| Wyścigówki | Jadą przy dolnej krawędzi, z obracającymi się kołami; różne kolory i tempo |
+| Losowo z wybranych | Losuje jedną z zaznaczonych scen przy każdej wizycie |
 
-1. Rozpakuj nową paczkę ZIP.
-2. W swoim istniejącym repozytorium GitHub **white-ghosts-card** wybierz **Add file → Upload files**.
-3. Wgraj nowy `white-ghosts-card.js` bezpośrednio do katalogu głównego repozytorium. Zatwierdź zastąpienie pliku przyciskiem **Commit changes / Zatwierdź zmiany**. Możesz też zaktualizować pozostałe pliki dokumentacji z paczki.
-4. W Home Assistant otwórz HACS i istniejący dodatek **Białe duszki — White Ghosts Card**. W jego menu wybierz **Pobierz ponownie / Redownload** i pobierz aktualną wersję domyślnej gałęzi. Jeśli HACS wyświetli aktualizację, możesz ją zainstalować.
-5. Odśwież stronę Home Assistanta. Na komputerze użyj **Ctrl+F5**. Jeśli w aplikacji mobilnej nadal jest stara karta, ponownie załaduj interfejs lub wyczyść jego pamięć podręczną.
-6. Pod przyciskami karty pojawi się rozwijana sekcja **Ustawienia**. Wybierz **Postać → Machający robocik** i kliknij **Zapisz ustawienia**.
-7. Kliknij **Pokaż teraz**, aby sprawdzić wygląd. **Włącz animacje** uruchamia harmonogram.
+Losowanie unika tej samej sceny dwa razy z rzędu, jeśli zaznaczono więcej niż jedną. Wszystkie sceny są dostępne przez cały rok. Dobór scen nie zależy automatycznie od świąt.
 
-Nie twórz drugiego repozytorium ani drugiej karty. Techniczna nazwa `custom:white-ghosts-card` pozostaje taka sama. Dotychczasowa konfiguracja duszków nadal działa.
+## Aktualizacja Twojego istniejącego dodatku
 
-## Ustawienia bezpośrednio w karcie
+1. Rozpakuj paczkę **domowe-animacje-1.2.0.zip**.
+2. Wejdź do swojego dotychczasowego repozytorium GitHub **white-ghosts-card**.
+3. Wybierz **Add file → Upload files** i wgraj do katalogu głównego repozytorium dwa pliki: **white-ghosts-card.js** oraz **hacs.json**. Zatwierdź przyciskiem **Commit changes / Zatwierdź zmiany**. Możesz także wgrać nowy README i pozostałą dokumentację.
+4. W HACS otwórz obecny dodatek. Wybierz **Pobierz ponownie / Redownload** z jego menu i pobierz domyślną gałąź; jeśli pojawi się aktualizacja, możesz ją zainstalować.
+5. Odśwież interfejs Home Assistanta, na komputerze najlepiej **Ctrl+F5**. W aplikacji mobilnej może być potrzebne ponowne załadowanie interfejsu.
+6. Rozwiń **Ustawienia** w karcie i wybierz nową animację. Po zmianie kliknij **Zapisz ustawienia**, a następnie **Pokaż teraz**.
 
-Rozwiń **Ustawienia** pod przyciskami. Możesz zmienić:
+Nazwa wyświetlana w HACS zmienia się na **Domowe Animacje** po odświeżeniu informacji o dodatku. Adres repozytorium i plik `white-ghosts-card.js` pozostają zgodne z obecną instalacją. Nie trzeba zmieniać nazwy repozytorium, zasobu pulpitu ani tworzyć drugiej karty.
 
-- nazwę karty i postać: duszki / robocik;
-- róg ekranu robocika: losowy albo jeden z czterech rogów;
-- minimalny i maksymalny odstęp w minutach — ustaw oba na **2**, aby postać pojawiała się co dwie minuty;
-- godziny aktywności — np. **06:00**–**22:00**;
-- czas wyświetlania w sekundach i rozmiar postaci;
-- liczbę duszków w trybie duszków.
+Dotychczasowy `type: custom:white-ghosts-card` nadal działa. Nowe karty mogą używać nazwy `type: custom:domowe-animacje-card`. Własny tytuł karty zachowuje się; jeśli w YAML masz wpisane `title: Białe duszki`, zmień nazwę w ustawieniach lub edytorze karty na **Domowe Animacje**.
 
-Po zmianach kliknij **Zapisz ustawienia**. Te ustawienia i stan włącznika są lokalne dla tej przeglądarki. Przetrwają odświeżenie strony. Inny telefon lub tablet ma własne ustawienia. **Przywróć z YAML** cofa lokalne zmiany do konfiguracji karty.
+Wgrywanie do publicznego GitHuba i instalację w HACS wykonuje właściciel repozytorium. Przygotowanie tej paczki nie aktualizuje automatycznie plików na GitHubie.
 
-Wbudowany edytor wizualny karty również pozwala ustawić te wartości: edytuj kartę, kliknij **Zastosuj w konfiguracji**, a następnie zapisz kartę w Home Assistant. W ten sposób zapisujesz wartości bazowe w konfiguracji pulpitu. Zmiana bazowej konfiguracji zastępuje wcześniejsze lokalne ustawienia przy jej zastosowaniu. Jeden wspólny harmonogram w przeglądarce: używaj jednej karty sterującej.
+## Ustawienia w karcie
 
-## Przykład: robocik co dwie minuty, 06:00–22:00
+- **Nazwa karty** — dowolny tytuł.
+- **Animacja** — sześć scen lub **Losowo z wybranych**.
+- **Animacje w losowaniu** — zaznacz sceny; lista pojawia się po wyborze trybu losowego. Co najmniej jedna musi zostać zaznaczona.
+- **Róg ekranu** — dotyczy robocika; pozostałe sceny poruszają się przez ekran.
+- **Kierunek ruchu** — losowy, z lewej do prawej lub odwrotnie; dotyczy scen przemieszczających się.
+- **Odstęp: minimum / maksimum** — w minutach. Ustaw oba na **2**, aby animacje zaczynały się co dwie minuty.
+- **Aktywne od / do** — ustaw np. **06:00**–**22:00**. Czas lokalny urządzenia z pulpitem. Jednakowe godziny oznaczają całą dobę; można podać przedział przez północ.
+- **Czas wyświetlania** — 5–60 sekund. Dla grup to czas pojedynczej postaci; kolejne mogą zaczynać z niewielkim opóźnieniem. Część aut jedzie szybciej.
+- **Rozmiar** — 40–220 px jako rozmiar bazowy. Sceny mają różne proporcje: sanie są szersze, motyle mniejsze. Na małych ekranach postacie są dodatkowo ograniczane.
+- **Liczba duszków / motylków / aut** — 1–8. Robocik, króliczek oraz sanie są pojedynczymi scenami.
+
+Po zmianach kliknij **Zapisz ustawienia**. Ustawienia i włącznik są zapamiętywane w tej przeglądarce. Przetrwają odświeżenie; inne urządzenie ma własne ustawienia. **Przywróć z YAML** usuwa lokalne nadpisania i przywraca wartości z konfiguracji karty.
+
+Wartości bazowe można też zapisać przez wizualny edytor karty: **Zastosuj w konfiguracji**, a następnie zapisz kartę w Home Assistant. Zmiana bazowej konfiguracji zastępuje poprzednie lokalne ustawienia. Jedna przeglądarka ma jeden harmonogram — używaj jednej karty sterującej.
+
+## Przykład YAML: wszystkie sceny, co dwie minuty, 06:00–22:00
 
 ```yaml
-type: custom:white-ghosts-card
-title: Domowy pomocnik
-character: robot
+type: custom:domowe-animacje-card
+title: Domowe Animacje
+character: random
+random_pool:
+  - ghosts
+  - robot
+  - santa
+  - bunny
+  - butterflies
+  - cars
 corner: random
+direction: random
 duration: 10
-size: 180
+size: 150
+ghosts: 3
 interval_min: 2
 interval_max: 2
 schedule_start: "06:00"
 schedule_end: "22:00"
 ```
 
-Ten przykład jest też w `example-robot.yaml`. Wybierz `bottom-right`, `bottom-left`, `top-right` albo `top-left` zamiast `random`, aby ustawić stały róg. Robocik jest jedną postacią; opcja `ghosts` dotyczy tylko duszków.
+Wersja zapisana w pliku: `example.yaml`. Dostępne `character`: `ghosts`, `robot`, `santa`, `bunny`, `butterflies`, `cars`, `random`. Dostępne `corner`: `random`, `bottom-right`, `bottom-left`, `top-right`, `top-left`. Dostępne `direction`: `random`, `left-to-right`, `right-to-left`.
 
-## Nowa instalacja
+Minimalna konfiguracja `type: custom:domowe-animacje-card` ma domyślnie duszki, 3 postacie, 14 sekund, rozmiar 110, losowy kierunek i róg, odstępy 5–15 minut oraz aktywność przez całą dobę. Pierwsze uruchomienie ma wyłączony harmonogram; włącz go przyciskiem w karcie. Aktualizacja zachowuje zapisany stan włącznika.
 
-Publikacja i pierwsza instalacja HACS: [INSTALL-HACS.md](INSTALL-HACS.md). Manifest i nazwa pliku nadal pasują do istniejącego repozytorium `white-ghosts-card`.
+## Zachowanie i ograniczenia
 
-Ręcznie: skopiuj `white-ghosts-card.js` do `/config/www/white-ghosts-card/white-ghosts-card.js`, a w zasobach pulpitu dodaj `/local/white-ghosts-card/white-ghosts-card.js?v=1.1.0` jako **Moduł JavaScript**. Dodaj kartę z typem `custom:white-ghosts-card`. Przy HACS użyj zasobu `/hacsfiles/white-ghosts-card/white-ghosts-card.js`, jeśli nie został zarejestrowany automatycznie. Nie ładuj jednocześnie wersji ręcznej i HACS.
+Przycisk **Pokaż teraz** działa poza wyznaczonymi godzinami. Godziny ograniczają rozpoczęcie animacji; rozpoczęta wizyta kończy się normalnie. Termin wypadający poza godzinami zostaje przesunięty na najbliższy dozwolony początek.
 
-## Wszystkie opcje YAML
+Pulpit musi pozostać otwarty i widoczny. W tle harmonogram jest wstrzymany, a po powrocie losowany jest nowy termin. Harmonogram działa także po przejściu do innego widoku. Zasób przywraca ustawienia po odświeżeniu. Wyłączenie lub zmiana ustawień od razu chowa bieżącą postać. Animacje przepuszczają kliknięcia do pulpitu.
 
-| Opcja | Domyślnie | Znaczenie |
-| --- | --- | --- |
-| `title` | `Białe duszki` / `Domowy pomocnik` | Nazwa karty, zależna od postaci przy braku jawnego tytułu |
-| `character` | `ghosts` | `ghosts` lub `robot` |
-| `corner` | `random` | Róg robocika, jak w przykładzie powyżej |
-| `ghosts` | `3` | Liczba duszków, 1–8 |
-| `duration` | `14` | Sekundy wizyty robocika albo przelotu jednego duszka, 5–60 |
-| `size` | `110` | Szerokość postaci w pikselach, 40–220; ograniczana na małym ekranie |
-| `interval_min` | `5` | Minimalny odstęp między początkami animacji w minutach, 1–1440 |
-| `interval_max` | `15` | Maksymalny odstęp, nie mniejszy niż `interval_min` |
-| `schedule_start` | `"00:00"` | Początek godzin aktywności, lokalny czas przeglądarki |
-| `schedule_end` | `"00:00"` | Koniec godzin; jednakowe godziny oznaczają całą dobę |
+Systemowe ograniczenie ruchu wstrzymuje automatyczne animacje. Ręczny test pokazuje wtedy nieruchome postacie przez dwie sekundy. Brak dźwięku, encji, automatyzacji i kont w chmurze.
 
-Przedział może przechodzić przez północ. Termin wylosowany poza przedziałem zostaje przesunięty na najbliższy dozwolony początek. Godziny ograniczają rozpoczęcie wizyty; rozpoczęta animacja kończy się normalnie. Przycisk **Pokaż teraz** działa też poza tymi godzinami.
+## Nowa instalacja i podgląd
 
-## Zachowanie i weryfikacja
+Pierwsza instalacja: [INSTALL-HACS.md](INSTALL-HACS.md). `podglad.html` pokazuje prawdziwą kartę z całym panelem ustawień na przykładowym pulpicie. Nie łączy się z Twoją instalacją Home Assistanta.
 
-Pulpit musi pozostać otwarty i widoczny. W tle harmonogram jest wstrzymany; po powrocie losowany jest nowy termin. Po otwarciu karty działa też po przejściu do innego widoku. Zasób przywraca zapisane ustawienia po odświeżeniu. Wyłączenie animacji od razu chowa postać. Warstwa postaci nie blokuje klikania pulpitu. Systemowe ograniczenie ruchu wstrzymuje automatyczne animacje, a test pokazuje nieruchomą postać przez dwie sekundy.
+## Weryfikacja i licencja
 
-`podglad.html` zawiera działającą kartę z nowym panelem ustawień. `pomocnik.svg` to statyczny rysunek robocika.
+50 testów logiki zakończonych powodzeniem: godziny, harmonogram, migracja zapisanych ustawień i nazwy, stary i nowy typ karty, formularz, losowanie, kierunek, geometria na małych ekranach, start i sprzątanie animacji. Sprawdzono statyczny wygląd wszystkich sześciu rysunków po wyrenderowaniu SVG. Nie wykonano testu w rzeczywistej instalacji Home Assistant ani kontroli animacji w przeglądarce. Po aktualizacji sprawdź każdą scenę przyciskiem **Pokaż teraz** na swoim urządzeniu.
 
-Przeprowadzono 32 testy logiki: harmonogram i zakresy godzin, migrację starszych ustawień, zapis i przywracanie opcji z panelu, wybór postaci, rogi ekranu, odczyt formularza i sprzątanie animacji. Nie wykonano kontroli wizualnej w przeglądarce ani testu w działającym Home Assistant. Wcześniejsza próba otwarcia lokalnego podglądu została zablokowana przez narzędzie przeglądarki. Sprawdź przycisk testowy po instalacji na docelowym urządzeniu.
-
-Pomysł przelotów inspirowany [Franky's Christmas Card](https://github.com/Franz1302/frankys-stuff-christmas-card). Własny kod i grafika; licencja MIT. Dokumentacja API: [karty Home Assistant](https://contributors.home-assistant.io/frontend/custom-ui/card/).
+Kod i ilustracje: MIT. Pomysł pierwotnych przelotów inspirowany [Franky's Christmas Card](https://github.com/Franz1302/frankys-stuff-christmas-card); brak kodu i multimediów z tamtego projektu. Dokumentacja: [API kart Home Assistant](https://contributors.home-assistant.io/frontend/custom-ui/card/), [wymagania HACS](https://www.hacs.xyz/docs/publish/plugin/).

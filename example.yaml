@@ -1,9 +1,18 @@
-type: custom:white-ghosts-card
-title: Białe duszki
-character: ghosts
+type: custom:domowe-animacje-card
+title: Domowe Animacje
+character: random
+random_pool:
+  - ghosts
+  - robot
+  - santa
+  - bunny
+  - butterflies
+  - cars
+corner: random
+direction: random
+duration: 10
+size: 150
 ghosts: 3
-duration: 20
-size: 110
 interval_min: 2
 interval_max: 2
 schedule_start: "06:00"
