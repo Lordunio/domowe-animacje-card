@@ -1,0 +1,9 @@
+type: custom:white-ghosts-card
+title: Białe duszki
+ghosts: 3
+duration: 14
+size: 110
+interval_min: 5
+interval_max: 15
+schedule_start: "00:00"
+schedule_end: "00:00"
