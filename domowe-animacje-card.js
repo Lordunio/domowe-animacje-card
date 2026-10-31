@@ -1,4 +1,4 @@
-/* Domowe Animacje 1.2.1. Original code and SVG artwork. MIT license. */
+/* Domowe Animacje 1.3.0. Original code and SVG artwork. MIT license. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
@@ -229,25 +229,80 @@
       <ellipse cx="90" cy="91" rx="7" ry="30" fill="#34445d"/><circle cx="90" cy="67" r="9" fill="#34445d"/>
     </svg>`;
   }
+  let carArtworkId = 0;
   function carSVG(index=0) {
-    const colors = [['#ee4e62','#af2542'],['#30b1ef','#1777b9'],['#f2b846','#c18a29'],['#936de2','#6848ad']][index%4];
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 145" fill="none">
-      <path d="M7 82h37M0 96h28M12 111h29" stroke="${colors[0]}" stroke-width="4" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="161" cy="124" rx="113" ry="7" fill="#29374f" opacity=".13"/>
-      <path d="M55 80 91 47h91l41 32 42 9 12 29H43l4-30Z" fill="${colors[1]}"/>
-      <path d="m57 79 35-28h88l42 32 42 10 7 18H48l4-24Z" fill="${colors[0]}"/>
-      <path d="m98 54-23 25h58V54Zm43 0v25h65l-30-25Z" fill="#173e5c"/>
-      <path d="m109 57-17 18m71-18-15 18" stroke="#70c8e6" stroke-width="4" opacity=".55"/>
-      <path d="M130 83h14v28h-14Z" fill="#fff5e1"/><path d="M151 83h7v28h-7Z" fill="#fff5e1"/>
-      <path d="M222 94h38" stroke="#ffedb0" stroke-width="6" stroke-linecap="round"/><path d="M53 91h10" stroke="#ffcad2" stroke-width="5" stroke-linecap="round"/>
-      <path d="M56 77V64m-10-1h33" stroke="${colors[1]}" stroke-width="7" stroke-linecap="round"/>
-      <path d="M44 116h231" stroke="${colors[1]}" stroke-width="5" stroke-linecap="round"/>
-      <g class="car-wheel"><circle cx="91" cy="112" r="22" fill="#263044"/><circle cx="91" cy="112" r="13" fill="#c6d5e4"/><circle cx="91" cy="112" r="5" fill="#5a718d"/><path d="M91 101v22m-11-11h22" stroke="#60758f" stroke-width="3"/></g>
-      <g class="car-wheel"><circle cx="226" cy="112" r="22" fill="#263044"/><circle cx="226" cy="112" r="13" fill="#c6d5e4"/><circle cx="226" cy="112" r="5" fill="#5a718d"/><path d="M226 101v22m-11-11h22" stroke="#60758f" stroke-width="3"/></g>
+    const id = 'domowe-car-'+(++carArtworkId);
+    const colors = [['#ee4e62','#a92240','#ffb6bf'],['#30b1ef','#146ba6','#a9e4ff'],['#f2b846','#b57f1e','#ffe6a6'],['#936de2','#5f40a4','#d8c6ff']][index%4];
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 150" fill="none">
+      <defs>
+        <linearGradient id="${id}-paint" x1="70" y1="58" x2="252" y2="122" gradientUnits="userSpaceOnUse">
+          <stop stop-color="${colors[2]}"/><stop offset=".46" stop-color="${colors[0]}"/><stop offset="1" stop-color="${colors[1]}"/>
+        </linearGradient>
+        <linearGradient id="${id}-glass" x1="120" y1="48" x2="205" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#eaf8ff"/><stop offset="1" stop-color="#79b0cc"/>
+        </linearGradient>
+        <radialGradient id="${id}-beam" cx=".12" cy=".5" r=".95">
+          <stop stop-color="#ffeaa9" stop-opacity=".6"/><stop offset="1" stop-color="#ffeaa9" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <g class="speed-lines" stroke="${colors[0]}" stroke-width="4" stroke-linecap="round" opacity=".55">
+        <path d="M8 85h30"/><path d="M0 100h20"/><path d="M14 115h24"/>
+      </g>
+      <ellipse cx="166" cy="128" rx="123" ry="8" fill="#16233a" opacity=".16"/>
+
+      <g class="car-wheel">
+        <circle cx="92" cy="112" r="21" fill="#232d3e"/>
+        <circle cx="92" cy="112" r="21" fill="none" stroke="#3a4a63" stroke-width="1.5"/>
+        <circle cx="92" cy="112" r="12.5" fill="#cdd9e6"/>
+        <path d="M92 103v18M83 112h18M85.6 105.6l12.8 12.8M98.4 105.6 85.6 118.4" stroke="#5f7391" stroke-width="2.8" stroke-linecap="round"/>
+        <circle cx="92" cy="112" r="3.6" fill="#8fa2b8"/>
+      </g>
+      <g class="car-wheel">
+        <circle cx="232" cy="112" r="21" fill="#232d3e"/>
+        <circle cx="232" cy="112" r="21" fill="none" stroke="#3a4a63" stroke-width="1.5"/>
+        <circle cx="232" cy="112" r="12.5" fill="#cdd9e6"/>
+        <path d="M232 103v18M223 112h18M225.6 105.6l12.8 12.8M238.4 105.6 225.6 118.4" stroke="#5f7391" stroke-width="2.8" stroke-linecap="round"/>
+        <circle cx="232" cy="112" r="3.6" fill="#8fa2b8"/>
+      </g>
+
+      <path d="M36 118V96Q36 86 50 83L86 77L120 48Q127 41 141 41H196Q209 41 218 51L246 78L282 85Q296 88 297 100V118H258Q256 96 232 96Q208 96 206 118H118Q115 96 92 96Q69 96 67 118Z" fill="url(#${id}-paint)"/>
+
+      <path d="M100 74L128 51Q131 48 136 48H147V74Z" fill="url(#${id}-glass)"/>
+      <path d="M153 48H196Q203 48 209 55L223 74H153Z" fill="url(#${id}-glass)"/>
+      <path d="M141 46H196" stroke="#ffffff" stroke-opacity=".38" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M167 51L158 71" stroke="#ffffff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+      <path d="M150 78V110" stroke="${colors[1]}" stroke-width="2" opacity=".45"/>
+      <rect x="156" y="86" width="12" height="3.4" rx="1.7" fill="#ffffff" opacity=".55"/>
+      <rect x="196" y="86" width="12" height="3.4" rx="1.7" fill="#ffffff" opacity=".55"/>
+      <path d="M214 70q6-2 8 2l-1 5-6-1Z" fill="${colors[1]}"/>
+      <path d="M122 112H228" stroke="${colors[1]}" stroke-width="3.2" stroke-linecap="round" opacity=".3"/>
+
+      <ellipse class="beam" cx="302" cy="97" rx="20" ry="15" fill="url(#${id}-beam)"/>
+      <rect x="285" y="94" width="12" height="5" rx="2.5" fill="#ffe9a8"/>
+      <rect x="40" y="99" width="9" height="5" rx="2.4" fill="#ff7a6b"/>
+      <path d="M41 118h254" stroke="#0f1a2b" stroke-width="3" stroke-linecap="round" opacity=".18"/>
     </svg>`;
   }
   function sceneSVG(kind,index=0) {
     return ({ghosts:ghostSVG,robot:robotSVG,santa:santaSVG,bunny:bunnySVG,butterflies:butterflySVG,cars:carSVG,random:robotSVG}[kind] || ghostSVG)(index);
+  }
+  // Aspect ratio of each artwork, so the header icon keeps its proportions.
+  const ART_RATIO = {ghosts:150/172,robot:240/280,santa:760/300,bunny:220/250,butterflies:180/160,cars:320/150,random:1};
+  function randomIconSVG() {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+      <g fill="#ffd98a"><path d="m18 31 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m99 24 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/></g>
+      <rect x="26" y="30" width="68" height="68" rx="20" fill="#e8eef8" stroke="#b9c7da" stroke-width="2.5"/>
+      <g fill="#33445c">
+        <circle cx="43" cy="47" r="5.6"/><circle cx="60" cy="47" r="5.6"/><circle cx="77" cy="47" r="5.6"/>
+        <circle cx="43" cy="64" r="5.6"/><circle cx="77" cy="64" r="5.6"/>
+        <circle cx="43" cy="81" r="5.6"/><circle cx="60" cy="81" r="5.6"/><circle cx="77" cy="81" r="5.6"/>
+      </g>
+      <circle cx="60" cy="64" r="5" fill="#a2bafb"/>
+    </svg>`;
+  }
+  function iconSVG(kind) {
+    return kind === 'random' ? randomIconSVG() : sceneSVG(kind);
   }
   function chooseCharacter(pool,last,random=Math.random()) {
     const choices = pool.length > 1 ? pool.filter(kind=>kind!==last) : pool;
@@ -270,8 +325,10 @@
     .bunny .art { animation:bunny-hop .85s ease-in-out infinite; }
     .bunny-ears { transform-origin:105px 100px;animation:bunny-ears .85s ease-in-out infinite; }
     .butterflies .wing-left,.butterflies .wing-right { transform-origin:90px 84px;animation:butterfly-flap .24s ease-in-out infinite alternate; }
-    .cars .art { animation:car-suspension .2s ease-in-out infinite alternate; }
-    .car-wheel { transform-box:fill-box;transform-origin:center;animation:car-wheel .32s linear infinite; }
+    .cars .art { animation:car-suspension 1.6s ease-in-out infinite alternate; }
+    .car-wheel { transform-box:fill-box;transform-origin:center;animation:car-wheel .55s linear infinite; }
+    .cars .speed-lines { animation:car-streak 1.4s ease-in-out infinite; }
+    .cars .beam { animation:car-glow 2.6s ease-in-out infinite; }
     @keyframes festive-float { 0%,100% {transform:translateY(-4px) rotate(-.65deg)} 50% {transform:translateY(4px) rotate(.65deg)} }
     @keyframes santa-hello { from{transform:rotate(-7deg)} to{transform:rotate(9deg)} }
     @keyframes reindeer-stride-a { from{transform:rotate(-13deg)} to{transform:rotate(15deg)} }
@@ -280,8 +337,10 @@
     @keyframes bunny-hop { 0%,100%{transform:translateY(0) scale(1.03,.97)} 50%{transform:translateY(-28px) scale(.98,1.02)} }
     @keyframes bunny-ears { 0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(6deg)} }
     @keyframes butterfly-flap { from{transform:scaleX(.22)} to{transform:scaleX(1)} }
-    @keyframes car-suspension { from{transform:translateY(-1px)} to{transform:translateY(1px)} }
+    @keyframes car-suspension { from{transform:translateY(-1.2px)} to{transform:translateY(1.2px)} }
     @keyframes car-wheel { to{transform:rotate(360deg)} }
+    @keyframes car-streak { 0%,100%{opacity:.3} 50%{opacity:.75} }
+    @keyframes car-glow { 0%,100%{opacity:.45} 50%{opacity:.9} }
     @media(prefers-reduced-motion:reduce) { .traveller * {animation:none!important} }
   `;
   function planScene(config,width,height,reduced=false,random=Math.random) {
@@ -468,7 +527,8 @@
     .pool-options label.check { flex-direction:row;align-items:center;gap:8px;min-height:44px; }
     .pool-options input[type=checkbox] { width:20px;min-height:20px;flex:0 0 20px;margin:0;padding:0;accent-color:var(--primary-color,#21aadd); }
     label { display:flex;flex-direction:column;gap:6px;min-width:0;font-size:12px;color:var(--secondary-text-color,#a9b3c7); }
-    input,select { display:block;box-sizing:border-box;width:100%;min-width:0;min-height:44px;border:1px solid var(--divider-color,#8794a44d);border-radius:10px;padding:9px;background:var(--ha-card-background,var(--card-background-color,#202635));color:var(--primary-text-color,#eef2fa);font:inherit;font-size:16px; }
+    input,select { display:block;box-sizing:border-box;width:100%;min-width:0;min-height:44px;border:1px solid var(--divider-color,#8794a44d);border-radius:12px;padding:10px 12px;background:rgba(127,127,127,.07);color:var(--primary-text-color,#eef2fa);font:inherit;font-size:16px;text-overflow:ellipsis;transition:border-color .15s ease,background .15s ease; }
+    input:hover,select:hover { border-color:rgba(127,127,127,.55); }
     input:focus-visible,select:focus-visible,summary:focus-visible { outline:2px solid var(--primary-color,#21aadd);outline-offset:2px; }
     fieldset { border:0;padding:0;margin:0;min-width:0; }
     .hint,.notice { font-size:12px;line-height:1.6;color:var(--secondary-text-color,#a9b3c7); }
@@ -537,25 +597,41 @@
     render() {
       this.shadowRoot.innerHTML = `<style>
         :host { display:block; }
-        ha-card { display:block;padding:22px;box-sizing:border-box;border-radius:var(--ha-card-border-radius,20px);background:var(--ha-card-background,var(--card-background-color,#202635));color:var(--primary-text-color,#eef2fa);font-family:var(--paper-font-body1_-_font-family,system-ui,sans-serif); }
-        header { display:flex;align-items:center;gap:12px; }
-        header>div:last-child { min-width:0; }
-        .icon { flex:0 0 48px;width:48px;height:56px; }
-        .icon svg { display:block;width:100%;height:100%; }
-        h2 { margin:0;font-size:20px;font-weight:600;letter-spacing:-.4px;overflow-wrap:anywhere; }
-        .sub { color:var(--secondary-text-color,#a9b3c7);font-size:13px;margin:5px 0 0;line-height:1.5; }
-        .actions { display:flex;flex-wrap:wrap;gap:10px;margin-top:20px; }
-        button { flex:1 1 120px;min-height:44px;border-radius:12px;padding:11px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--divider-color,#8794a44d);background:transparent;color:inherit; }
+        ha-card { position:relative;display:block;padding:20px;box-sizing:border-box;border-radius:var(--ha-card-border-radius,22px);background:var(--ha-card-background,var(--card-background-color,#202635));color:var(--primary-text-color,#eef2fa);font-family:var(--paper-font-body1_-_font-family,system-ui,sans-serif);overflow:hidden;container-type:inline-size; }
+        ha-card::before { content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 100% at 100% 0%,rgba(127,127,127,.14),transparent 62%); }
+        header { position:relative;display:flex;align-items:center;gap:12px; }
+        .titles { flex:1 1 auto;min-width:0; }
+        .icon { flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:42px; }
+        .icon svg { display:block;height:42px;width:calc(42px * var(--ar,1.5));max-width:88px;filter:drop-shadow(0 3px 6px rgba(16,38,60,.22)); }
+        h2 { margin:0;font-size:18px;font-weight:600;letter-spacing:-.3px;overflow-wrap:break-word; }
+        .sub { color:var(--secondary-text-color,#a9b3c7);font-size:12.5px;margin:3px 0 0;line-height:1.45; }
+        .meta { display:flex;flex-wrap:wrap;gap:6px;margin-top:12px; }
+        .chip { display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11.5px;font-weight:500;color:var(--secondary-text-color,#a9b3c7);border:1px solid rgba(127,127,127,.22);background:rgba(127,127,127,.07);white-space:nowrap; }
+        .state { position:relative;flex:0 0 auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.1);color:var(--secondary-text-color,#a9b3c7);white-space:nowrap; }
+        .state i { width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px rgba(127,127,127,.18); }
+        .state[data-state=on] { color:#2f9e75;border-color:rgba(47,158,117,.4);background:rgba(47,158,117,.12); }
+        .state[data-state=on] i { box-shadow:0 0 0 3px rgba(47,158,117,.18); }
+        .state[data-state=paused] { color:#c98d2a;border-color:rgba(201,141,42,.4);background:rgba(201,141,42,.13); }
+        .actions { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px; }
+        button { min-height:46px;border-radius:13px;padding:11px 12px;font:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;border:1px solid var(--divider-color,#8794a44d);background:rgba(127,127,127,.09);color:inherit;transition:background .15s ease,transform .12s ease; }
+        button:hover:not(:disabled) { background:rgba(127,127,127,.17); }
+        button:active:not(:disabled) { transform:scale(.985); }
         .test,.save { background:var(--primary-color,#a2bafb);color:var(--text-primary-color,#151e35);border-color:transparent; }
+        .test:hover:not(:disabled),.save:hover:not(:disabled) { background:var(--primary-color,#a2bafb);filter:brightness(1.06); }
         button:focus-visible { outline:3px solid var(--primary-color,#a2bafb);outline-offset:3px; }
         button:disabled { opacity:.5;cursor:default; }
-        .status { min-height:32px;line-height:1.6;margin:16px 0 0;color:var(--secondary-text-color,#a9b3c7);font-size:12px; }
-        details { border-top:1px solid var(--divider-color,#8794a433);margin-top:12px; }
-        summary { min-height:44px;display:list-item;align-content:center;font-size:14px;cursor:pointer; }
-        details form { padding-top:12px; }
+        .status { min-height:30px;line-height:1.6;margin:14px 0 0;color:var(--secondary-text-color,#a9b3c7);font-size:12px; }
+        details { position:relative;margin-top:14px;padding:0 14px;border:1px solid rgba(127,127,127,.18);border-radius:16px;background:rgba(127,127,127,.06); }
+        summary { min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:600;cursor:pointer;list-style:none; }
+        summary::-webkit-details-marker { display:none; }
+        summary::after { content:"";width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;opacity:.55;transform:rotate(45deg) translateY(-2px);transition:transform .18s ease; }
+        details[open] summary::after { transform:rotate(-135deg) translateY(-2px); }
+        details form { padding:2px 0 14px; }
+        @container (max-width:300px) { .actions { grid-template-columns:1fr; } .state { padding:7px; } .state span { display:none; } }
         ${FORM_STYLE}
       </style><ha-card>
-        <header><div class="icon" aria-hidden="true"></div><div><h2></h2><p class="sub"></p></div></header>
+        <header><div class="icon" aria-hidden="true"></div><div class="titles"><h2></h2><p class="sub"></p></div><div class="state" data-state="off"><i></i><span></span></div></header>
+        <div class="meta"><span class="chip" data-meta="interval"></span><span class="chip" data-meta="hours"></span></div>
         <div class="actions"><button class="toggle" type="button"></button><button class="test" type="button"></button></div>
         <p class="status" aria-live="polite"></p>
         <details><summary>Ustawienia</summary>
@@ -593,11 +669,16 @@
       const config = this.effectiveConfig;
       root.querySelector('h2').textContent = config.title;
       if (this.iconCharacter !== config.character) {
-        root.querySelector('.icon').innerHTML = sceneSVG(config.character); this.iconCharacter = config.character;
+        const icon = root.querySelector('.icon');
+        icon.innerHTML = iconSVG(config.character);
+        icon.style.setProperty('--ar', String(ART_RATIO[config.character] || 1));
+        this.iconCharacter = config.character;
       }
-      root.querySelector('.sub').textContent = LABELS[config.character] +
-        (config.interval_min === config.interval_max ? ` • co ${config.interval_min} min` : ` • co ${config.interval_min}–${config.interval_max} min`) +
-        ` • ${config.schedule_start === config.schedule_end ? 'cała doba' : config.schedule_start+'–'+config.schedule_end}`;
+      root.querySelector('.sub').textContent = LABELS[config.character];
+      root.querySelector('[data-meta="interval"]').textContent =
+        config.interval_min === config.interval_max ? `co ${config.interval_min} min` : `co ${config.interval_min}–${config.interval_max} min`;
+      root.querySelector('[data-meta="hours"]').textContent =
+        config.schedule_start === config.schedule_end ? 'cała doba' : `${config.schedule_start}–${config.schedule_end}`;
       root.querySelector('.test').textContent = 'Pokaż teraz';
       button.disabled = this.preview; button.setAttribute('aria-pressed',String(runtime.enabled));
       button.textContent = runtime.enabled ? 'Wyłącz animacje' : 'Włącz animacje';
@@ -608,6 +689,13 @@
       else if (runtime.enabled) status = 'Animacje są wstrzymane, gdy zakładka jest w tle.';
       if (!runtime.storageOK) status += ' Nie udało się odczytać lub zapisać ustawień przeglądarki.';
       root.querySelector('.status').textContent = status;
+      const state = this.preview ? 'off' : !runtime.enabled ? 'off' : runtime.reduced.matches ? 'paused' : 'on';
+      const pill = root.querySelector('.state');
+      const pillText = this.preview ? 'Podgląd' : state === 'on' ? 'Włączone' : state === 'paused' ? 'Wstrzymane' : 'Wyłączone';
+      pill.dataset.state = state;
+      pill.querySelector('span').textContent = pillText;
+      pill.setAttribute('aria-label', 'Stan animacji: ' + pillText);
+      pill.title = 'Stan animacji: ' + pillText;
       root.querySelector('fieldset').disabled = this.preview;
       if (!this.dirty) fillForm(root.querySelector('form'),config);
     }

@@ -1,6 +1,14 @@
-# Domowe Animacje 1.2.1
+# Domowe Animacje 1.3.0
 
 Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikołaj z saniami, wielkanocny króliczek, motylki oraz wyścigówki. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Nowości w 1.3.0
+
+- Karta ma nowy wygląd: ikona wybranej sceny w nagłówku, kolorowa plakietka stanu (wyłączone, włączone, wstrzymane), chipy z częstotliwością i godzinami oraz przyciski w dwóch kolumnach, które na wąskiej karcie układają się jeden pod drugim.
+- Ikona trybu losowego to kostka, wcześniej zawsze pokazywał się rysunek robocika.
+- Panel ustawień jest lżejszy wizualnie: obramowana sekcja z chevronem, łagodniejsze pola formularza i czytelne zaznaczanie scen w losowaniu.
+- Wyścigówki są przerysowane: gradientowe nadwozie, jaśniejsze szyby, felgi z obracającymi się szprychami, światła z poświatą i płynniejsze zawieszenie zamiast drgania.
+- Przyciski i plakietki zachowują rozmiar 44–48 px, a animacje nadal respektują systemowe ograniczenie ruchu.
 
 ## Poprawki w 1.2.1
 
@@ -11,7 +19,7 @@ Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikoła
 
 ## Aktualizacja w Twoim repozytorium domowe-animacje-card
 
-1. Rozpakuj paczkę `domowe-animacje-card-1.2.1.zip`.
+1. Rozpakuj paczkę `domowe-animacje-card-1.3.0.zip`.
 2. Na GitHubie w repozytorium **domowe-animacje-card** wybierz **Add file → Upload files**.
 3. Wgraj nowy **domowe-animacje-card.js** do katalogu głównego i zatwierdź zmianę. Możesz też wgrać README i pozostałe pliki z paczki. Manifest `hacs.json` ma nadal tę samą nazwę pliku.
 4. W HACS otwórz **Domowe Animacje**, wybierz **Aktualizuj informacje**, a następnie **Pobierz ponownie / Redownload**, pobierając aktualną domyślną gałąź.
@@ -20,10 +28,10 @@ Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikoła
 Jeżeli nadal widać stary rysunek, po ponownym pobraniu sprawdź zasób pulpitu. Dla obecnej instalacji z nowego repozytorium powinien wskazywać na:
 
 ```text
-/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.2.1
+/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.3.0
 ```
 
-Zmień istniejący wpis zamiast dodawać duplikat. Typ: **Moduł JavaScript**. Usuń nieaktualne zasoby poprzedniej instalacji `white-ghosts-card`, jeśli wciąż są ładowane, i odśwież cały interfejs. Pierwsza linia nowego pliku na GitHubie zawiera `Domowe Animacje 1.2.1`.
+Zmień istniejący wpis zamiast dodawać duplikat. Typ: **Moduł JavaScript**. Usuń nieaktualne zasoby poprzedniej instalacji `white-ghosts-card`, jeśli wciąż są ładowane, i odśwież cały interfejs. Pierwsza linia nowego pliku na GitHubie zawiera `Domowe Animacje 1.3.0`.
 
 Paczka jest przygotowana lokalnie. Nie została automatycznie opublikowana w Twoim repozytorium ani zainstalowana w HACS.
 
