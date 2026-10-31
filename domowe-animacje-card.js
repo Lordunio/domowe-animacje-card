@@ -1,13 +1,14 @@
-/* Domowe Animacje 1.3.0. Original code and SVG artwork. MIT license. */
+/* Domowe Animacje 1.4.0. Original code and SVG artwork. MIT license. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
   if (customElements.get(TAG)) return;
   const DEFAULTS = { title: 'Domowe Animacje', ghosts: 3, duration: 14, size: 110,
-    interval_min: 5, interval_max: 15, schedule_start: '00:00', schedule_end: '00:00', character: 'ghosts', corner: 'random', direction: 'random', random_pool: ['ghosts','robot','santa','bunny','butterflies','cars'] };
+    interval_min: 5, interval_max: 15, schedule_start: '00:00', schedule_end: '00:00', character: 'ghosts', corner: 'random', direction: 'random', caption: '', random_pool: ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars'] };
   function normalize(input = {}) {
     const out = { ...DEFAULTS };
     if (input.title !== undefined) out.title = String(input.title).slice(0, 100);
+    if (input.caption !== undefined) out.caption = String(input.caption).slice(0, 60);
     for (const [key, min, max] of [['ghosts',1,8],['duration',5,60],['size',40,220],['interval_min',1,1440],['interval_max',1,1440]]) {
       if (input[key] === undefined) continue;
       if (typeof input[key] !== 'number' || !Number.isFinite(input[key]) || input[key] < min || input[key] > max)
@@ -92,6 +93,7 @@
     </svg>`;
   }
   const ROBOT_CSS = `
+    .robot-wrap { position:absolute;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none; }
     .robot svg { display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 8px 12px #0d38552b); }
     .wave-arm { transform-origin:158px 176px;animation:hello-wave 1s ease-in-out infinite; }
     .robot-head { transform-origin:120px 150px;animation:hello-head 3s ease-in-out infinite; }
@@ -101,8 +103,8 @@
     @keyframes hello-blink { 0%,43%,47%,100% { transform:scaleY(1); } 45% { transform:scaleY(.12); } }
     @media(prefers-reduced-motion:reduce) { .wave-arm,.robot-head,.robot-eyes { animation:none!important; } }
   `;
-  const CHARACTERS = ['ghosts','robot','santa','bunny','butterflies','cars'];
-  const LABELS = {ghosts:'Białe duszki',robot:'Machający robocik',santa:'Mikołaj z saniami',bunny:'Wielkanocny króliczek',butterflies:'Motylki',cars:'Wyścigówki',random:'Losowo z wybranych'};
+  const CHARACTERS = ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars'];
+  const LABELS = {ghosts:'Białe duszki',robot:'Machający robocik',robot2:'Latający robocik',santa:'Mikołaj z saniami',bunny:'Wielkanocny króliczek',pumpkins:'Straszne dynie',butterflies:'Motylki',cars:'Wyścigówki',random:'Losowo z wybranych'};
   let sleighArtworkId = 0;
   function santaSVG() {
     const id = 'domowe-sleigh-'+(++sleighArtworkId);
@@ -284,11 +286,66 @@
       <path d="M41 118h254" stroke="#0f1a2b" stroke-width="3" stroke-linecap="round" opacity=".18"/>
     </svg>`;
   }
+  function robot2SVG() {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" fill="none">
+      <defs>
+        <linearGradient id="robot2-jet" x1="120" y1="210" x2="120" y2="258" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8fe9ff" stop-opacity=".9"/><stop offset=".55" stop-color="#7cc7ff" stop-opacity=".45"/><stop offset="1" stop-color="#b98bff" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="120" cy="243" rx="46" ry="8" fill="#122a3c" opacity=".16"/>
+      <g class="robot2-jets">
+        <path d="M98 204q22 46 44 0-8 34-22 34t-22-34Z" fill="url(#robot2-jet)"/>
+        <ellipse cx="120" cy="208" rx="16" ry="6" fill="#bff0ff" opacity=".55"/>
+      </g>
+      <path d="M120 92V72" stroke="#bfd3e2" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="120" cy="63" r="9" fill="#ff9a4a"/><circle cx="117" cy="60" r="3" fill="#ffd8b5" opacity=".9"/>
+      <path d="M66 138q-20 8-20 30" stroke="#c9d8e6" stroke-width="12" stroke-linecap="round"/>
+      <path d="M174 138q20 8 20 30" stroke="#c9d8e6" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="46" cy="173" r="11" fill="#eef5fb"/><circle cx="194" cy="173" r="11" fill="#eef5fb"/>
+      <path d="M96 202h48l-9 14H105Z" fill="#c7d8e7"/>
+      <rect x="58" y="88" width="124" height="118" rx="52" fill="#d3e0ec"/>
+      <rect x="58" y="88" width="115" height="110" rx="50" fill="#f8fbff"/>
+      <rect x="78" y="106" width="84" height="58" rx="26" fill="#163049"/>
+      <path d="M86 119q11-9 25-8" stroke="#67e1ff" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+      <g class="robot2-eye">
+        <ellipse cx="120" cy="135" rx="15" ry="17" fill="#79e9ff"/>
+        <ellipse cx="115" cy="128" rx="5" ry="6" fill="#f2feff" opacity=".9"/>
+      </g>
+      <path d="M104 150q16 10 32 0" stroke="#5fd7f0" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+      <circle cx="94" cy="186" r="4" fill="#a8d4ea"/><circle cx="110" cy="186" r="4" fill="#a8d4ea"/>
+      <path d="M126 186h28" stroke="#c3d6e6" stroke-width="5" stroke-linecap="round"/>
+    </svg>`;
+  }
+  function pumpkinSVG(index=0) {
+    const shades = [['#e8792a','#c0561b','#f39a4c'],['#f08430','#c65f1f','#ffab5e'],['#dc6a22','#b04a14','#ef8f42']][index%3];
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 190" fill="none">
+      <defs>
+        <radialGradient id="pumpkin-glow" cx=".5" cy=".5" r=".5">
+          <stop stop-color="#ffc46a" stop-opacity=".55"/><stop offset="1" stop-color="#ffc46a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="100" cy="172" rx="58" ry="9" fill="#3a1508" opacity=".16"/>
+      <g class="pumpkin-glow"><ellipse cx="100" cy="116" rx="62" ry="46" fill="url(#pumpkin-glow)"/></g>
+      <ellipse cx="68" cy="112" rx="33" ry="48" fill="${shades[1]}"/>
+      <ellipse cx="132" cy="112" rx="33" ry="48" fill="${shades[1]}"/>
+      <ellipse cx="100" cy="112" rx="44" ry="53" fill="${shades[0]}"/>
+      <ellipse cx="100" cy="112" rx="29" ry="50" fill="${shades[2]}" opacity=".45"/>
+      <path d="M100 60v104M78 66q-8 20-8 46t8 44M122 66q8 20 8 46t-8 44" stroke="#a5430f" stroke-width="3" opacity=".22"/>
+      <path d="M96 62q-5-13 3-21 7-7 14-1l3 10q-8 4-9 13Z" fill="#4e7a3a"/>
+      <path d="M110 52q16-6 24 6" stroke="#5f8f45" stroke-width="4" stroke-linecap="round"/>
+      <path d="M74 92 92 88 88 105Z" fill="#ffd98a"/>
+      <path d="M126 92 108 88 112 105Z" fill="#ffd98a"/>
+      <path d="M96 112h8l-4 9Z" fill="#ffd98a"/>
+      <path d="M64 126 78 137 88 124 98 139 108 124 118 139 128 126 134 133 126 147Q100 156 74 145Z" fill="#ffd98a"/>
+      <path d="M76 78q-12 14-13 32" stroke="#ffbf85" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    </svg>`;
+  }
   function sceneSVG(kind,index=0) {
-    return ({ghosts:ghostSVG,robot:robotSVG,santa:santaSVG,bunny:bunnySVG,butterflies:butterflySVG,cars:carSVG,random:robotSVG}[kind] || ghostSVG)(index);
+    return ({ghosts:ghostSVG,robot:robotSVG,robot2:robot2SVG,santa:santaSVG,bunny:bunnySVG,pumpkins:pumpkinSVG,butterflies:butterflySVG,cars:carSVG,random:robotSVG}[kind] || ghostSVG)(index);
   }
   // Aspect ratio of each artwork, so the header icon keeps its proportions.
-  const ART_RATIO = {ghosts:150/172,robot:240/280,santa:760/300,bunny:220/250,butterflies:180/160,cars:320/150,random:1};
+  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:760/300,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,random:1};
   function randomIconSVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
       <g fill="#ffd98a"><path d="m18 31 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m99 24 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/></g>
@@ -308,6 +365,11 @@
     const choices = pool.length > 1 ? pool.filter(kind=>kind!==last) : pool;
     return choices[Math.min(choices.length-1,Math.floor(random*choices.length))];
   }
+  const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const CAPTION_CSS = `
+    .caption { display:inline-block;max-width:min(78vw,340px);padding:8px 16px;border-radius:999px;background:rgba(12,17,26,.74);color:#fff;font:600 clamp(13px,2.4vw,18px)/1.3 system-ui,sans-serif;letter-spacing:.01em;text-align:center;overflow-wrap:anywhere;box-shadow:0 8px 20px rgba(8,14,24,.28);backdrop-filter:blur(8px); }
+    .traveller .caption { position:relative;left:50%;transform:translateX(-50%);width:max-content;margin-top:8px; }
+  `;
   const SCENE_CSS = `
     .traveller { position:absolute;left:0;top:0;will-change:transform; }
     .traveller svg { display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 4px 8px #16325126); }
@@ -341,23 +403,34 @@
     @keyframes car-wheel { to{transform:rotate(360deg)} }
     @keyframes car-streak { 0%,100%{opacity:.3} 50%{opacity:.75} }
     @keyframes car-glow { 0%,100%{opacity:.45} 50%{opacity:.9} }
+    .robot2 .art { animation:hover-bob 3.2s ease-in-out infinite; }
+    .robot2-eye { transform-box:fill-box;transform-origin:center;animation:robot2-blink 4.6s infinite; }
+    .robot2-jets { transform-box:view-box;transform-origin:120px 212px;animation:jet-pulse .8s ease-in-out infinite alternate; }
+    .pumpkins .art { animation:pumpkin-bob 3s ease-in-out infinite alternate; }
+    .pumpkins .pumpkin-glow { animation:pumpkin-glow 2.2s ease-in-out infinite; }
+    @keyframes hover-bob { 0%,100%{transform:translateY(-8px) rotate(-1.5deg)} 50%{transform:translateY(8px) rotate(1.5deg)} }
+    @keyframes robot2-blink { 0%,42%,46%,100%{transform:scaleY(1)} 44%{transform:scaleY(.15)} }
+    @keyframes jet-pulse { from{opacity:.45;transform:scaleY(.85)} to{opacity:.95;transform:scaleY(1.1)} }
+    @keyframes pumpkin-bob { from{transform:translateY(0) rotate(-1deg)} to{transform:translateY(-7px) rotate(1deg)} }
+    @keyframes pumpkin-glow { 0%,100%{opacity:.35} 50%{opacity:.85} }
     @media(prefers-reduced-motion:reduce) { .traveller * {animation:none!important} }
   `;
   function planScene(config,width,height,reduced=false,random=Math.random) {
     const kind = config.character;
-    const count = ['ghosts','butterflies','cars'].includes(kind) ? config.ghosts : 1;
-    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:145/300}[kind];
+    const count = ['ghosts','butterflies','cars','pumpkins'].includes(kind) ? config.ghosts : 1;
+    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200}[kind];
     const reverse = config.direction === 'right-to-left' || (config.direction === 'random' && random()>.5);
-    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55}[kind];
-    const airborne = ['ghosts','santa','butterflies'].includes(kind);
+    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05}[kind];
+    const airborne = ['ghosts','santa','butterflies','robot2'].includes(kind);
     const items = [];
     for(let i=0;i<count;i++) {
-      const variation = kind === 'butterflies' ? .8+random()*.35 : 1;
+      const variation = kind === 'butterflies' ? .8+random()*.35 : kind === 'pumpkins' ? .82+random()*.3 : 1;
       const w = Math.min(config.size*scale*variation,width*(reduced ? .85/count : .8),height*.32/ratio);
       const h = w*ratio;
       let y;
       if(kind === 'cars') y = height-h-18-(i%2)*h*.85;
       else if(kind === 'bunny') y = height-h-20;
+      else if(kind === 'pumpkins') y = height-h-16-(i%2)*6;
       else y = height*(kind === 'santa' ? .2+random()*.18 : .2+random()*.48);
       y = Math.max(12,Math.min(height-h-12,y));
       const duration = reduced ? 2000 : config.duration*1000*(kind === 'cars' && i%2 ? .8 : 1);
@@ -451,17 +524,24 @@
       layer.setAttribute('aria-hidden', 'true');
       layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';
       const root = layer.attachShadow({ mode:'open' });
-      root.innerHTML = '<style>:host{pointer-events:none!important}.robot{position:absolute;pointer-events:none}'+ROBOT_CSS+'</style>';
+      root.innerHTML = '<style>:host{pointer-events:none!important}.robot{pointer-events:none;width:100%}'+ROBOT_CSS+CAPTION_CSS+'</style>';
+      const wrap = document.createElement('div'); wrap.className = 'robot-wrap';
       const robot = document.createElement('div'); robot.className = 'robot';
       robot.innerHTML = robotSVG();
+      wrap.append(robot);
+      const text = (config.caption || '').trim();
+      if (text) {
+        const caption = document.createElement('div'); caption.className = 'caption';
+        caption.textContent = text; wrap.append(caption);
+      }
       const corners = ['bottom-right','bottom-left','top-right','top-left'];
       const corner = config.corner === 'random' ? corners[Math.floor(Math.random()*4)] : config.corner;
       const left = corner.endsWith('left'), top = corner.startsWith('top');
-      robot.dataset.corner = corner;
-      robot.style.width = Math.min(config.size,window.innerWidth*.4,window.innerHeight*.5)+'px';
-      robot.style[left ? 'left' : 'right'] = 'max(12px, env(safe-area-inset-'+(left ? 'left' : 'right')+'))';
-      robot.style[top ? 'top' : 'bottom'] = 'max(12px, env(safe-area-inset-'+(top ? 'top' : 'bottom')+'))';
-      root.append(robot); document.body.append(layer); this.layer = layer;
+      wrap.dataset.corner = corner;
+      wrap.style.width = Math.min(config.size,window.innerWidth*.4,window.innerHeight*.5)+'px';
+      wrap.style[left ? 'left' : 'right'] = 'max(12px, env(safe-area-inset-'+(left ? 'left' : 'right')+'))';
+      wrap.style[top ? 'top' : 'bottom'] = 'max(12px, env(safe-area-inset-'+(top ? 'top' : 'bottom')+'))';
+      root.append(wrap); document.body.append(layer); this.layer = layer;
       const frames = this.reduced.matches
         ? [{opacity:0},{opacity:1,offset:.15},{opacity:1,offset:.85},{opacity:0}]
         : [{transform:'translateY('+(top ? '-130%' : '130%')+')',opacity:0},
@@ -469,7 +549,7 @@
           {transform:'translateY(0)',opacity:1,offset:.91},
           {transform:'translateY('+(top ? '-130%' : '130%')+')',opacity:0}];
       const duration = this.reduced.matches ? 2000 : config.duration*1000;
-      this.animations.push(robot.animate(frames,{duration,fill:'both',easing:'ease-in-out'}));
+      this.animations.push(wrap.animate(frames,{duration,fill:'both',easing:'ease-in-out'}));
       this.cleanup = setTimeout(() => this.stopFlight(),duration+100);
     }
     showScene(config) {
@@ -478,13 +558,15 @@
       const layer = document.createElement('div');layer.setAttribute('aria-hidden','true');
       layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';
       const root = layer.attachShadow({mode:'open'});
-      root.innerHTML = '<style>:host{pointer-events:none!important}'+SCENE_CSS+'</style>';
+      root.innerHTML = '<style>:host{pointer-events:none!important}'+SCENE_CSS+CAPTION_CSS+'</style>';
       let finish = 0;
       for(const item of planScene(config,window.innerWidth,window.innerHeight,this.reduced.matches)) {
         const node = document.createElement('div');node.className = 'traveller '+item.kind;
         node.style.width = item.width+'px';
         if(this.reduced.matches) {node.style.left=item.staticX+'px';node.style.top=item.y+'px';}
-        node.innerHTML = '<div class="flip" style="transform:scaleX('+(item.reverse ? -1 : 1)+')"><div class="art">'+sceneSVG(item.kind,item.index)+'</div></div>';
+        const text = item.index === 0 ? (config.caption || '').trim() : '';
+        node.innerHTML = '<div class="flip" style="transform:scaleX('+(item.reverse ? -1 : 1)+')"><div class="art">'+sceneSVG(item.kind,item.index)+'</div></div>' +
+          (text ? '<div class="caption">'+escapeHTML(text)+'</div>' : '');
         root.append(node);
         this.animations.push(node.animate(item.frames,{duration:item.duration,delay:item.delay,fill:'both',easing:'linear'}));
         finish = Math.max(finish,item.duration+item.delay);
@@ -507,6 +589,7 @@
   const runtime = window[runtimeKey] || (window[runtimeKey] = new GhostRuntime());
   const FORM_FIELDS = `
     <label class="wide">Nazwa karty<input name="title" maxlength="100" type="text"></label>
+    <label class="wide">Napis na animacji (opcjonalnie)<input name="caption" maxlength="60" type="text" placeholder="np. Wesołych Świąt!"></label>
     <label>Animacja<select name="character">${Object.entries(LABELS).map(([value,label])=>'<option value="'+value+'">'+label+'</option>').join('')}</select></label>
     <label>Róg ekranu (robocik)<select name="corner"><option value="random">Losowy róg</option><option value="bottom-right">Prawy dolny</option><option value="bottom-left">Lewy dolny</option><option value="top-right">Prawy górny</option><option value="top-left">Lewy górny</option></select></label>
     <label>Kierunek ruchu<select name="direction"><option value="random">Losowy kierunek</option><option value="left-to-right">Z lewej do prawej</option><option value="right-to-left">Z prawej do lewej</option></select></label>
@@ -517,7 +600,7 @@
     <label>Aktywne do<input name="schedule_end" type="time" required></label>
     <label>Czas wyświetlania (s)<input name="duration" type="number" min="5" max="60" step="any" required></label>
     <label>Rozmiar (px)<input name="size" type="number" min="40" max="220" step="1" required></label>
-    <label data-ghost-count>Liczba duszków / motylków / aut<input name="ghosts" type="number" min="1" max="8" step="1" required></label>
+    <label data-ghost-count>Liczba duszków / dyni / motylków / aut<input name="ghosts" type="number" min="1" max="8" step="1" required></label>
   `;
   const FORM_STYLE = `
     .fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px; }
@@ -552,7 +635,7 @@
   }
   function adjustForm(form) {
     const kind = form.elements.namedItem('character').value;
-    form.querySelector('[data-ghost-count]').hidden = !['ghosts','butterflies','cars','random'].includes(kind);
+    form.querySelector('[data-ghost-count]').hidden = !['ghosts','butterflies','cars','pumpkins','random'].includes(kind);
     form.querySelector('[data-random-pool]').hidden = kind !== 'random';
     form.elements.namedItem('corner').disabled = !['robot','random'].includes(kind);
     form.elements.namedItem('direction').disabled = kind === 'robot';

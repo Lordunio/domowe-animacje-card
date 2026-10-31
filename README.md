@@ -1,6 +1,13 @@
-# Domowe Animacje 1.3.0
+# Domowe Animacje 1.4.0
 
-Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikołaj z saniami, wielkanocny króliczek, motylki oraz wyścigówki. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Nowości w 1.4.0
+
+- Nowa scena **Latający robocik**: mniejszy, okrągły pomocnik z jednym okiem, antenką i dyszą — unosi się, mruga i delikatnie przechyla, inaczej niż machający robocik w rogu ekranu.
+- Nowa scena **Straszne dynie**: świecące, wyrzeźbione dynie w trzech odcieniach, z podświetlanym wnętrzem i kołysaniem; liczbę dyni ustawiasz tak jak duszków (1–8).
+- Nowa opcja **Napis na animacji**: własny tekst (do 60 znaków) wyświetlany pod postacią podczas każdej wizyty, np. „Wesołych Świąt!”. Działa też z robocikiem w rogu ekranu, a tekst jest bezpiecznie escapowany.
+- Nowe sceny są dostępne w trybie losowym i w edytorze karty. Domyślna lista losowania zawiera je wszystkie.
 
 ## Nowości w 1.3.0
 
@@ -19,7 +26,7 @@ Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikoła
 
 ## Aktualizacja w Twoim repozytorium domowe-animacje-card
 
-1. Rozpakuj paczkę `domowe-animacje-card-1.3.0.zip`.
+1. Rozpakuj paczkę `domowe-animacje-card-1.4.0.zip`.
 2. Na GitHubie w repozytorium **domowe-animacje-card** wybierz **Add file → Upload files**.
 3. Wgraj nowy **domowe-animacje-card.js** do katalogu głównego i zatwierdź zmianę. Możesz też wgrać README i pozostałe pliki z paczki. Manifest `hacs.json` ma nadal tę samą nazwę pliku.
 4. W HACS otwórz **Domowe Animacje**, wybierz **Aktualizuj informacje**, a następnie **Pobierz ponownie / Redownload**, pobierając aktualną domyślną gałąź.
@@ -28,10 +35,10 @@ Sześć animacji do pulpitu Home Assistanta: duszki, machający robocik, Mikoła
 Jeżeli nadal widać stary rysunek, po ponownym pobraniu sprawdź zasób pulpitu. Dla obecnej instalacji z nowego repozytorium powinien wskazywać na:
 
 ```text
-/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.3.0
+/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.4.0
 ```
 
-Zmień istniejący wpis zamiast dodawać duplikat. Typ: **Moduł JavaScript**. Usuń nieaktualne zasoby poprzedniej instalacji `white-ghosts-card`, jeśli wciąż są ładowane, i odśwież cały interfejs. Pierwsza linia nowego pliku na GitHubie zawiera `Domowe Animacje 1.3.0`.
+Zmień istniejący wpis zamiast dodawać duplikat. Typ: **Moduł JavaScript**. Usuń nieaktualne zasoby poprzedniej instalacji `white-ghosts-card`, jeśli wciąż są ładowane, i odśwież cały interfejs. Pierwsza linia nowego pliku na GitHubie zawiera `Domowe Animacje 1.4.0`.
 
 Paczka jest przygotowana lokalnie. Nie została automatycznie opublikowana w Twoim repozytorium ani zainstalowana w HACS.
 
