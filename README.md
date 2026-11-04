@@ -1,6 +1,10 @@
-# Domowe Animacje 1.5.0
+# Domowe Animacje 1.5.1
 
 Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Poprawki w 1.5.1
+
+- Przerysowane roboty mają większe, bardziej szczegółowe obudowy i wyraźniejsze twarze. Sceny zawierają znacznie więcej liści i większą zaspę śniegu.
 
 ## Nowości w 1.5.0
 
@@ -8,11 +12,11 @@ Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający roboci
 - **Lampki choinkowe** to osobna, niezależna dekoracja przy górnej krawędzi ekranu. W ustawieniach karty wybierz „Lampki choinkowe → Włączone niezależnie” i zapisz. Działają z dowolną sceną i także wtedy, gdy automatyczne animacje są wyłączone. Ich ustawienie jest lokalne dla przeglądarki albo można je ustawić bazowo w YAML: `lights: true`. Lampki pozostają widoczne do wyłączenia; nie korzystają z harmonogramu wizyt. Nie przechwytują kliknięć, a przy ograniczeniu ruchu świecą bez migania.
 - Wcześniej zapisane listy losowania pozostają bez zmian. Aby uwzględnić nowe roboty w istniejącej konfiguracji losowej, zaznacz je ręcznie.
 
-## Aktualizacja do 1.5.0
+## Aktualizacja do 1.5.1
 
 1. W repozytorium domowe-animacje-card umieść w katalogu głównym pliki z paczki, w szczególności `domowe-animacje-card.js`, `README.md` i `hacs.json`.
 2. Zatwierdź zmianę na GitHubie. W HACS odśwież informacje i pobierz ponownie właściwą gałąź lub wydanie, a następnie odśwież przeglądarkę.
-3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.5.0` i odśwież stronę. Nie dodawaj drugiego zasobu.
+3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.5.1` i odśwież stronę. Nie dodawaj drugiego zasobu.
 4. W ustawieniach wybierz robota i kliknij „Pokaż teraz”. Lampki włącz osobno i zapisz ustawienia. Sprawdź też działanie na tablecie.
 
 ## Nowości w 1.4.0

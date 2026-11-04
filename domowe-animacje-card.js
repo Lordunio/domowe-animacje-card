@@ -1,4 +1,4 @@
-/* Domowe Animacje 1.5.0. Original code and SVG artwork. MIT license. */
+/* Domowe Animacje 1.5.1. Original code and SVG artwork. MIT license. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
@@ -343,22 +343,27 @@
     </svg>`;
   }
   function cleanerSVG(snow=false) {
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" fill="none">
-      <ellipse cx="132" cy="169" rx="126" ry="11" fill="#102337" opacity=".22"/>
-      ${snow ? '<path d="M194 158q22-19 42-8 18-25 41-4 13-4 21 12v11H190Z" fill="#e3f5ff" stroke="#a8d6e9" stroke-width="3"/>' : '<g fill="#e88a24" stroke="#b75a15" stroke-width="2"><path d="M222 158q-14-18-25-8 4 15 25 8Z"/><path d="M246 162q-5-23-20-19 0 19 20 19Z"/><path d="M269 162q3-19-14-19-5 17 14 19Z"/></g>'}
-      <path d="M45 112q0-32 37-36h65q36 3 40 39l-3 36H42Z" fill="#f1f8fc" stroke="#7191a5" stroke-width="4"/>
-      <rect x="76" y="24" width="93" height="67" rx="27" fill="#edf8fc" stroke="#799caf" stroke-width="4"/><rect x="85" y="32" width="75" height="50" rx="20" fill="#123047"/>
-      <path d="M101 54q5-10 10 0m24 0q5-10 10 0M110 66q12 9 24 0" stroke="#46dfff" stroke-width="4" stroke-linecap="round"/><path d="M122 23V12" stroke="#799caf" stroke-width="4"/><circle cx="122" cy="9" r="6" fill="#4edaff"/>
-      <path d="M89 120l24-20 24 20v25H89Z" fill="#03a9f4"/><path d="M113 110v26m0-12-9-8m9 8 9-8" stroke="white" stroke-width="3" stroke-linecap="round"/><circle cx="104" cy="115" r="3" fill="white"/><circle cx="122" cy="115" r="3" fill="white"/><circle cx="113" cy="136" r="3" fill="white"/>
-      <g class="cleaner-wheel"><circle cx="69" cy="151" r="19" fill="#1d3442" stroke="#7195a5" stroke-width="4"/><circle cx="69" cy="151" r="8" fill="#49bcd8"/></g><g class="cleaner-wheel"><circle cx="157" cy="151" r="19" fill="#1d3442" stroke="#7195a5" stroke-width="4"/><circle cx="157" cy="151" r="8" fill="#49bcd8"/></g>
-      ${snow ? '<path d="M179 121l18 4 6 29h-20Z" fill="#657b87"/><path d="M188 134h73q-3 31-20 33h-43q-12-5-10-33Z" fill="#ffba31" stroke="#c97512" stroke-width="4"/>' : '<path d="M174 119l32 22" stroke="#667f8b" stroke-width="7" stroke-linecap="round"/><g class="cleaner-brush"><ellipse cx="216" cy="150" rx="33" ry="8" fill="#647f8d"/><path d="M187 152h58l8 15h-73Z" fill="#f6ac27" stroke="#d57914" stroke-width="3"/><path d="M196 154l-4 11m16-11-1 12m13-12 2 12m10-12 4 11" stroke="#c46e16" stroke-width="2"/></g>'}
+    const leaf = (x,y,r,c,scale=1) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${scale})"><path d="M0 0l4-7 3 3 4-8 2 8 5-3 1 7 6 1-5 5 2 4-7-1-3 6-4-6-7 2 2-5-5-3Z" fill="${c}" stroke="#9d4c19" stroke-width=".8"/><path d="M12 12V-6m0 11-6-4m6 1 5-5" stroke="#ffe399" stroke-width=".9"/></g>`;
+    const leaves = [[10,169,-20,'#d65b19',1],[31,180,25,'#ef9d18',.8],[48,165,-20,'#e36024',.9],[70,182,12,'#c6411c',.8],[319,160,20,'#e6511b',1.3],[336,171,-18,'#f4a519',1.2],[349,153,8,'#de7420',1.15],[367,169,40,'#c63b1b',1.25],[382,158,-25,'#f7a521',1],[400,176,15,'#d6521c',1.2],[420,167,-35,'#f2a322',1],[443,180,20,'#d85b1a',.9]].map(v=>leaf(...v)).join('');
+    const ground = snow ? `<path d="M0 178q18-5 35-1t32 0q16-4 34 1h208q12-5 20-2 7-18 21-15 8-25 29-17 10-19 27-9 16-3 22 13 22-8 28 13 15 1 24 16v12H0Z" fill="#d9f2ff" stroke="#a7d5ed" stroke-width="3"/><path d="M330 170q11-7 19-3 4-15 17-13m28-8q11-8 20 2m20 16q12-6 21 2" stroke="#fff" stroke-width="5" stroke-linecap="round"/><g fill="#fff"><circle cx="348" cy="138" r="4"/><circle cx="378" cy="126" r="3"/><circle cx="418" cy="135" r="4"/><circle cx="452" cy="154" r="3"/></g>` : `<path d="M0 185h480" stroke="#c77733" stroke-width="3" opacity=".5"/>${leaves}`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 205" fill="none">
+      <defs><linearGradient id="clean-body" x1="0" x2=".7" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#a8c9d7"/></linearGradient><linearGradient id="clean-face" x1="0" x2="1" y2="1"><stop stop-color="#27465b"/><stop offset="1" stop-color="#071827"/></linearGradient></defs>
+      ${ground}<ellipse cx="202" cy="185" rx="120" ry="8" fill="#112b3a" opacity=".25"/>
+      <path d="M106 130q1-38 44-45h71q43 3 47 48l-4 34H101Z" fill="url(#clean-body)" stroke="#7194a6" stroke-width="4"/><path d="M114 145q15-12 38-12h74q19 0 29 9" stroke="#dff7ff" stroke-width="5" opacity=".8"/>
+      <path d="M197 39V18" stroke="#668a9c" stroke-width="5" stroke-linecap="round"/><circle cx="197" cy="13" r="9" fill="#52dcff" stroke="#d4faff" stroke-width="3"/>
+      <rect x="135" y="35" width="126" height="79" rx="32" fill="url(#clean-body)" stroke="#7394a6" stroke-width="4"/><rect x="147" y="44" width="104" height="61" rx="25" fill="url(#clean-face)" stroke="#3e778e" stroke-width="3"/>
+      <path d="M165 70q6-12 13 0m35 0q6-12 13 0M181 86q17 12 34 0" stroke="#51e4ff" stroke-width="5" stroke-linecap="round"/><path d="M153 53q18-9 37-6" stroke="#a3f5ff" stroke-width="3" opacity=".65"/>
+      <circle cx="137" cy="77" r="20" fill="#d9eef6" stroke="#7493a4" stroke-width="4"/><circle cx="137" cy="77" r="12" fill="#208aaa"/><circle cx="137" cy="77" r="7" fill="#183b51"/>
+      <path d="M153 140l27-22 27 22v27h-54Z" fill="#03a9f4"/><path d="M180 130v28m0-11-10-9m10 9 10-9" stroke="white" stroke-width="3.5" stroke-linecap="round"/><circle cx="170" cy="138" r="3.5" fill="white"/><circle cx="190" cy="138" r="3.5" fill="white"/><circle cx="180" cy="158" r="3.5" fill="white"/>
+      <g class="cleaner-wheel"><circle cx="133" cy="164" r="24" fill="#1d3442" stroke="#688b9e" stroke-width="5"/><circle cx="133" cy="164" r="13" fill="#3298b6"/><circle cx="133" cy="164" r="7" fill="#203f50"/></g><g class="cleaner-wheel"><circle cx="231" cy="164" r="24" fill="#1d3442" stroke="#688b9e" stroke-width="5"/><circle cx="231" cy="164" r="13" fill="#3298b6"/><circle cx="231" cy="164" r="7" fill="#203f50"/></g>
+      ${snow ? '<path d="M258 135l38 9 4 16h-38Z" fill="#78919c"/><path d="M288 134h83q-2 37-22 43h-45q-17-6-16-43Z" fill="#ffb42b" stroke="#c97714" stroke-width="4"/><path d="M296 141h66" stroke="#ffe298" stroke-width="4"/><path d="M346 173q12-12 22-6 6-15 18-9 7-9 18-2 13-1 17 14l-3 14h-72Z" fill="#f0faff" stroke="#b6deef" stroke-width="3"/>' : '<path d="M255 132l48 25" stroke="#607d8a" stroke-width="10" stroke-linecap="round"/><g class="cleaner-brush"><ellipse cx="309" cy="161" rx="40" ry="10" fill="#647f8d" stroke="#a9c5d1" stroke-width="3"/><path d="M273 163h72l10 22h-92Z" fill="#f9af20" stroke="#ce7514" stroke-width="3"/><path d="M280 166l-5 16m18-16-3 17m16-17-1 17m15-17 2 17m12-17 4 17m8-17 5 16" stroke="#c86f0e" stroke-width="3"/></g>'}
     </svg>`;
   }
   function sceneSVG(kind,index=0) {
     return ({ghosts:ghostSVG,robot:robotSVG,robot2:robot2SVG,santa:santaSVG,bunny:bunnySVG,pumpkins:pumpkinSVG,butterflies:butterflySVG,cars:carSVG,leafrobot:()=>cleanerSVG(false),snowrobot:()=>cleanerSVG(true),random:robotSVG}[kind] || ghostSVG)(index);
   }
   // Aspect ratio of each artwork, so the header icon keeps its proportions.
-  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:760/300,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,leafrobot:300/190,snowrobot:300/190,random:1};
+  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:760/300,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,leafrobot:480/205,snowrobot:480/205,random:1};
   function randomIconSVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
       <g fill="#ffd98a"><path d="m18 31 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m99 24 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/></g>
@@ -434,9 +439,9 @@
   function planScene(config,width,height,reduced=false,random=Math.random) {
     const kind = config.character;
     const count = ['ghosts','butterflies','cars','pumpkins'].includes(kind) ? config.ghosts : 1;
-    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200,leafrobot:190/300,snowrobot:190/300}[kind];
+    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200,leafrobot:205/480,snowrobot:205/480}[kind];
     const reverse = config.direction === 'right-to-left' || (config.direction === 'random' && random()>.5);
-    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05,leafrobot:1.8,snowrobot:1.8}[kind];
+    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05,leafrobot:3.1,snowrobot:3.1}[kind];
     const airborne = ['ghosts','santa','butterflies','robot2'].includes(kind);
     const items = [];
     for(let i=0;i<count;i++) {
