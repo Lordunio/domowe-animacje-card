@@ -1,6 +1,13 @@
-# Domowe Animacje 1.5.2
+# Domowe Animacje 1.6.0
 
 Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Nowości w 1.6.0
+
+- Robot sprzątający liście imituje ruch szczotki, a nad stertą unoszą się liście. Robot i sterta przesuwają się po ekranie razem.
+- Lampki mają cztery efekty: stałe światło, migotanie, przechodzące światło i wspólne pulsowanie. Wybierz je w ustawieniach karty przy opcji „Efekt lampek”; można też ustawić w YAML `lights_effect: chase` (wartości: `steady`, `twinkle`, `chase`, `pulse`). Niezależny przełącznik lampek pozostał bez zmian.
+- Przy systemowym ograniczeniu ruchu lampki świecą stale, a efekty ruchu scen zostają wyłączone. Zmienione ustawienia w karcie są zapisywane w przeglądarce.
+- Sprawdzono składnię i logikę ustawień oraz zmiany trybów. Nie wykonano podglądu w przeglądarce ani w Home Assistant; należy sprawdzić wygląd i płynność na urządzeniu docelowym.
 
 ## Nowości w 1.5.2
 
@@ -21,7 +28,7 @@ Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający roboci
 
 1. W repozytorium domowe-animacje-card umieść w katalogu głównym pliki z paczki, w szczególności `domowe-animacje-card.js`, `README.md` i `hacs.json`.
 2. Zatwierdź zmianę na GitHubie. W HACS odśwież informacje i pobierz ponownie właściwą gałąź lub wydanie, a następnie odśwież przeglądarkę.
-3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.5.2` i odśwież stronę. Nie dodawaj drugiego zasobu.
+3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.6.0` i odśwież stronę. Nie dodawaj drugiego zasobu.
 4. W ustawieniach wybierz robota i kliknij „Pokaż teraz”. Lampki włącz osobno i zapisz ustawienia. Sprawdź też działanie na tablecie.
 
 ## Nowości w 1.4.0
