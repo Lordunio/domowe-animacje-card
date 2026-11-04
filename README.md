@@ -1,6 +1,11 @@
-# Domowe Animacje 1.5.1
+# Domowe Animacje 1.5.2
 
 Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Nowości w 1.5.2
+
+- Nowe grafiki robotów 3D z dużą stertą liści i śniegu. Obie grafiki są osadzone w pliku JavaScript; nie trzeba przesyłać dodatkowych obrazów. Sceny przesuwają się po ekranie jako całość.
+- Weryfikacja: sprawdzono składnię i logikę ustawień. Nie udało się sprawdzić tej wersji wizualnie w przeglądarce ani w Home Assistant — prosimy przetestować obie sceny przyciskiem „Pokaż teraz”.
 
 ## Poprawki w 1.5.1
 
@@ -16,7 +21,7 @@ Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający roboci
 
 1. W repozytorium domowe-animacje-card umieść w katalogu głównym pliki z paczki, w szczególności `domowe-animacje-card.js`, `README.md` i `hacs.json`.
 2. Zatwierdź zmianę na GitHubie. W HACS odśwież informacje i pobierz ponownie właściwą gałąź lub wydanie, a następnie odśwież przeglądarkę.
-3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.5.1` i odśwież stronę. Nie dodawaj drugiego zasobu.
+3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.5.2` i odśwież stronę. Nie dodawaj drugiego zasobu.
 4. W ustawieniach wybierz robota i kliknij „Pokaż teraz”. Lampki włącz osobno i zapisz ustawienia. Sprawdź też działanie na tablecie.
 
 ## Nowości w 1.4.0
