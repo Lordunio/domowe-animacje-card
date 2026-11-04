@@ -1,12 +1,13 @@
-/* Domowe Animacje 1.4.0. Original code and SVG artwork. MIT license. */
+/* Domowe Animacje 1.5.0. Original code and SVG artwork. MIT license. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
   if (customElements.get(TAG)) return;
   const DEFAULTS = { title: 'Domowe Animacje', ghosts: 3, duration: 14, size: 110,
-    interval_min: 5, interval_max: 15, schedule_start: '00:00', schedule_end: '00:00', character: 'ghosts', corner: 'random', direction: 'random', caption: '', random_pool: ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars'] };
+    interval_min: 5, interval_max: 15, schedule_start: '00:00', schedule_end: '00:00', character: 'ghosts', corner: 'random', direction: 'random', caption: '', lights: false, random_pool: ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars','leafrobot','snowrobot'] };
   function normalize(input = {}) {
     const out = { ...DEFAULTS };
+    if (input.lights !== undefined) { if (typeof input.lights !== 'boolean') throw new Error('lights: użyj true lub false.'); out.lights = input.lights; }
     if (input.title !== undefined) out.title = String(input.title).slice(0, 100);
     if (input.caption !== undefined) out.caption = String(input.caption).slice(0, 60);
     for (const [key, min, max] of [['ghosts',1,8],['duration',5,60],['size',40,220],['interval_min',1,1440],['interval_max',1,1440]]) {
@@ -103,8 +104,8 @@
     @keyframes hello-blink { 0%,43%,47%,100% { transform:scaleY(1); } 45% { transform:scaleY(.12); } }
     @media(prefers-reduced-motion:reduce) { .wave-arm,.robot-head,.robot-eyes { animation:none!important; } }
   `;
-  const CHARACTERS = ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars'];
-  const LABELS = {ghosts:'Białe duszki',robot:'Machający robocik',robot2:'Latający robocik',santa:'Mikołaj z saniami',bunny:'Wielkanocny króliczek',pumpkins:'Straszne dynie',butterflies:'Motylki',cars:'Wyścigówki',random:'Losowo z wybranych'};
+  const CHARACTERS = ['ghosts','robot','robot2','santa','bunny','pumpkins','butterflies','cars','leafrobot','snowrobot'];
+  const LABELS = {ghosts:'Białe duszki',robot:'Machający robocik',robot2:'Latający robocik',santa:'Mikołaj z saniami',bunny:'Wielkanocny króliczek',pumpkins:'Straszne dynie',butterflies:'Motylki',cars:'Wyścigówki',leafrobot:'Robot sprzątający liście',snowrobot:'Robot odśnieżający',random:'Losowo z wybranych'};
   let sleighArtworkId = 0;
   function santaSVG() {
     const id = 'domowe-sleigh-'+(++sleighArtworkId);
@@ -341,11 +342,23 @@
       <path d="M76 78q-12 14-13 32" stroke="#ffbf85" stroke-width="5" stroke-linecap="round" opacity=".5"/>
     </svg>`;
   }
+  function cleanerSVG(snow=false) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" fill="none">
+      <ellipse cx="132" cy="169" rx="126" ry="11" fill="#102337" opacity=".22"/>
+      ${snow ? '<path d="M194 158q22-19 42-8 18-25 41-4 13-4 21 12v11H190Z" fill="#e3f5ff" stroke="#a8d6e9" stroke-width="3"/>' : '<g fill="#e88a24" stroke="#b75a15" stroke-width="2"><path d="M222 158q-14-18-25-8 4 15 25 8Z"/><path d="M246 162q-5-23-20-19 0 19 20 19Z"/><path d="M269 162q3-19-14-19-5 17 14 19Z"/></g>'}
+      <path d="M45 112q0-32 37-36h65q36 3 40 39l-3 36H42Z" fill="#f1f8fc" stroke="#7191a5" stroke-width="4"/>
+      <rect x="76" y="24" width="93" height="67" rx="27" fill="#edf8fc" stroke="#799caf" stroke-width="4"/><rect x="85" y="32" width="75" height="50" rx="20" fill="#123047"/>
+      <path d="M101 54q5-10 10 0m24 0q5-10 10 0M110 66q12 9 24 0" stroke="#46dfff" stroke-width="4" stroke-linecap="round"/><path d="M122 23V12" stroke="#799caf" stroke-width="4"/><circle cx="122" cy="9" r="6" fill="#4edaff"/>
+      <path d="M89 120l24-20 24 20v25H89Z" fill="#03a9f4"/><path d="M113 110v26m0-12-9-8m9 8 9-8" stroke="white" stroke-width="3" stroke-linecap="round"/><circle cx="104" cy="115" r="3" fill="white"/><circle cx="122" cy="115" r="3" fill="white"/><circle cx="113" cy="136" r="3" fill="white"/>
+      <g class="cleaner-wheel"><circle cx="69" cy="151" r="19" fill="#1d3442" stroke="#7195a5" stroke-width="4"/><circle cx="69" cy="151" r="8" fill="#49bcd8"/></g><g class="cleaner-wheel"><circle cx="157" cy="151" r="19" fill="#1d3442" stroke="#7195a5" stroke-width="4"/><circle cx="157" cy="151" r="8" fill="#49bcd8"/></g>
+      ${snow ? '<path d="M179 121l18 4 6 29h-20Z" fill="#657b87"/><path d="M188 134h73q-3 31-20 33h-43q-12-5-10-33Z" fill="#ffba31" stroke="#c97512" stroke-width="4"/>' : '<path d="M174 119l32 22" stroke="#667f8b" stroke-width="7" stroke-linecap="round"/><g class="cleaner-brush"><ellipse cx="216" cy="150" rx="33" ry="8" fill="#647f8d"/><path d="M187 152h58l8 15h-73Z" fill="#f6ac27" stroke="#d57914" stroke-width="3"/><path d="M196 154l-4 11m16-11-1 12m13-12 2 12m10-12 4 11" stroke="#c46e16" stroke-width="2"/></g>'}
+    </svg>`;
+  }
   function sceneSVG(kind,index=0) {
-    return ({ghosts:ghostSVG,robot:robotSVG,robot2:robot2SVG,santa:santaSVG,bunny:bunnySVG,pumpkins:pumpkinSVG,butterflies:butterflySVG,cars:carSVG,random:robotSVG}[kind] || ghostSVG)(index);
+    return ({ghosts:ghostSVG,robot:robotSVG,robot2:robot2SVG,santa:santaSVG,bunny:bunnySVG,pumpkins:pumpkinSVG,butterflies:butterflySVG,cars:carSVG,leafrobot:()=>cleanerSVG(false),snowrobot:()=>cleanerSVG(true),random:robotSVG}[kind] || ghostSVG)(index);
   }
   // Aspect ratio of each artwork, so the header icon keeps its proportions.
-  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:760/300,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,random:1};
+  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:760/300,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,leafrobot:300/190,snowrobot:300/190,random:1};
   function randomIconSVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
       <g fill="#ffd98a"><path d="m18 31 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m99 24 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/></g>
@@ -413,14 +426,17 @@
     @keyframes jet-pulse { from{opacity:.45;transform:scaleY(.85)} to{opacity:.95;transform:scaleY(1.1)} }
     @keyframes pumpkin-bob { from{transform:translateY(0) rotate(-1deg)} to{transform:translateY(-7px) rotate(1deg)} }
     @keyframes pumpkin-glow { 0%,100%{opacity:.35} 50%{opacity:.85} }
+    .cleaner-wheel { transform-box:fill-box;transform-origin:center;animation:car-wheel .8s linear infinite; }
+    .cleaner-brush { transform-box:fill-box;transform-origin:center;animation:brush-wiggle .25s ease-in-out infinite alternate; }
+    @keyframes brush-wiggle { from{transform:rotate(-3deg)} to{transform:rotate(3deg)} }
     @media(prefers-reduced-motion:reduce) { .traveller * {animation:none!important} }
   `;
   function planScene(config,width,height,reduced=false,random=Math.random) {
     const kind = config.character;
     const count = ['ghosts','butterflies','cars','pumpkins'].includes(kind) ? config.ghosts : 1;
-    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200}[kind];
+    const ratio = {ghosts:172/150,santa:300/760,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200,leafrobot:190/300,snowrobot:190/300}[kind];
     const reverse = config.direction === 'right-to-left' || (config.direction === 'random' && random()>.5);
-    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05}[kind];
+    const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05,leafrobot:1.8,snowrobot:1.8}[kind];
     const airborne = ['ghosts','santa','butterflies','robot2'].includes(kind);
     const items = [];
     for(let i=0;i<count;i++) {
@@ -429,7 +445,7 @@
       const h = w*ratio;
       let y;
       if(kind === 'cars') y = height-h-18-(i%2)*h*.85;
-      else if(kind === 'bunny') y = height-h-20;
+      else if(['bunny','leafrobot','snowrobot'].includes(kind)) y = height-h-20;
       else if(kind === 'pumpkins') y = height-h-16-(i%2)*6;
       else y = height*(kind === 'santa' ? .2+random()*.18 : .2+random()*.48);
       y = Math.max(12,Math.min(height-h-12,y));
@@ -471,6 +487,15 @@
       });
       this.schedule();
     }
+    syncLights() {
+      if (!this.config.lights || !document.body) { this.lightsLayer?.remove(); this.lightsLayer = null; return; }
+      if (this.lightsLayer) return;
+      const layer = document.createElement('div'); layer.setAttribute('aria-hidden','true');
+      layer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:64px;pointer-events:none;z-index:9998;overflow:hidden';
+      const root = layer.attachShadow({mode:'open'});
+      root.innerHTML = `<style>:host{pointer-events:none}.wire{position:absolute;top:4px;left:0;width:100%;height:20px;border-top:3px solid #324b40;border-radius:50%}.bulbs{display:flex;justify-content:space-around;width:100%;position:absolute;top:8px}.bulb{width:10px;height:17px;border-radius:45% 45% 55% 55%;background:var(--c);box-shadow:0 0 8px 3px var(--c);animation:twinkle 2.4s ease-in-out infinite alternate;animation-delay:var(--d)}.bulb:before{content:"";display:block;background:#45544a;width:6px;height:4px;margin:-4px auto 0}@keyframes twinkle{from{opacity:.45}to{opacity:1}}@media(prefers-reduced-motion:reduce){.bulb{animation:none}}</style><div class="wire"></div><div class="bulbs">${Array.from({length:32},(_,i)=>`<span class="bulb" style="--c:${['#ff5050','#ffd447','#57e987','#45bfff','#ed74ff'][i%5]};--d:-${(i%7)*.3}s"></span>`).join('')}</div>`;
+      document.body.append(layer); this.lightsLayer = layer;
+    }
     persist() {
       try { localStorage.setItem(KEY, JSON.stringify({ config: this.config, base: this.base, enabled: this.enabled })); }
       catch { this.storageOK = false; }
@@ -499,7 +524,7 @@
       this.persist(); this.schedule();
     }
     schedule() {
-      clearTimeout(this.timer); this.next = null;
+      this.syncLights(); clearTimeout(this.timer); this.next = null;
       if (this.enabled && !document.hidden && !this.reduced.matches) {
         const c = this.config;
         const delay = (c.interval_min + Math.random() * (c.interval_max - c.interval_min)) * 60000;
@@ -590,6 +615,7 @@
   const FORM_FIELDS = `
     <label class="wide">Nazwa karty<input name="title" maxlength="100" type="text"></label>
     <label class="wide">Napis na animacji (opcjonalnie)<input name="caption" maxlength="60" type="text" placeholder="np. Wesołych Świąt!"></label>
+    <label>Lampki choinkowe<select name="lights"><option value="false">Wyłączone</option><option value="true">Włączone niezależnie</option></select></label>
     <label>Animacja<select name="character">${Object.entries(LABELS).map(([value,label])=>'<option value="'+value+'">'+label+'</option>').join('')}</select></label>
     <label>Róg ekranu (robocik)<select name="corner"><option value="random">Losowy róg</option><option value="bottom-right">Prawy dolny</option><option value="bottom-left">Lewy dolny</option><option value="top-right">Prawy górny</option><option value="top-left">Lewy górny</option></select></label>
     <label>Kierunek ruchu<select name="direction"><option value="random">Losowy kierunek</option><option value="left-to-right">Z lewej do prawej</option><option value="right-to-left">Z prawej do lewej</option></select></label>
@@ -648,7 +674,7 @@
         continue;
       }
       const value = form.elements.namedItem(key).value;
-      out[key] = ['ghosts','duration','size','interval_min','interval_max'].includes(key) ? Number(value) : value;
+      out[key] = key === 'lights' ? value === 'true' : ['ghosts','duration','size','interval_min','interval_max'].includes(key) ? Number(value) : value;
     }
     if(out.character !== 'random' && out.random_pool.length === 0) out.random_pool = [...DEFAULTS.random_pool];
     return normalize(out);
