@@ -1,6 +1,70 @@
-# Domowe Animacje 1.4.0
+# Domowe Animacje 1.7.0
 
-Osiem animacji do pulpitu Home Assistanta: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Własne rysunki SVG i kod JavaScript, bez zewnętrznych bibliotek i pobierania multimediów.
+Dziesięć animacji do pulpitu Home Assistanta, w tym robot sprzątający liście i robot odśnieżający: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Kod JavaScript, rysunki SVG i osadzone grafiki PNG, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Nowości w 1.7.0
+
+- **Stałe wyświetlanie wszystkich postaci:** wybierz „Wyświetlanie postaci → Stale — bez przerw” i włącz animacje. Postać pozostaje widoczna w aktywnych godzinach. Sceny poruszają się w obrębie ekranu, a machający robot zostaje w wybranym rogu. W trybie losowym postać zmienia się po czasie ustawionym w polu „Czas wyświetlania”. Odstępy w minutach dotyczą tylko trybu okresowego.
+- **Lampki jak girlanda:** dodatkowy układ „Na przemian: wyżej / niżej”. Zielone gałązki choinki mają osobny przełącznik „Zielona girlanda”; można zostawić same lampki. Wszystkie cztery efekty świecenia pozostają dostępne. Lampki działają niezależnie od włączenia postaci i ich harmonogramu.
+- **Roboty:** 42 wirujące liście i 64 płatki śniegu, również nad głową robota. Koła obu robotów obracają się, a szczotka robota z liśćmi ma efekt obrotu. Efekty cząstek i ruch części można wyłączyć osobno.
+- **Realistyczny Mikołaj:** zaakceptowana grafika z czerwono-złotymi saniami i reniferem. Cztery fragmenty nóg renifera poruszają się w przeciwnych fazach; cała scena delikatnie unosi się w locie. To animacja części grafiki, nie film ani symulacja anatomiczna.
+- Systemowe ograniczenie ruchu wyłącza animacje części i lampek. W trybie stałym postać nadal jest widoczna nieruchomo. Ukrycie zakładki usuwa postacie, a powrót przywraca tryb stały.
+- Ustawienia sprzed aktualizacji zachowują tryb okresowy i lampki bez zielonych gałązek. Nowa grafika jest osadzona w pliku JavaScript; do działania w HACS wystarczy ten sam jeden plik.
+
+### Przykład nowych opcji
+
+```yaml
+type: custom:domowe-animacje-card
+character: leafrobot
+display_mode: continuous
+cleaner_particles: true
+cleaner_motion: true
+lights: true
+lights_effect: twinkle
+lights_layout: alternating
+lights_garland: true
+schedule_start: '00:00'
+schedule_end: '00:00'
+```
+
+Po zapisaniu wybierz **Włącz animacje**. Przycisk **Pokaż teraz** działa także przy wyłączonej automatyce, jako pojedyncza wizyta.
+
+### Aktualizacja i sprawdzenie
+
+W HACS pobierz wersję **v1.7.0**, a następnie odśwież interfejs. Gdy przeglądarka pokazuje starą wersję, zmień parametr istniejącego zasobu na `?v=1.7.0` i wykonaj Ctrl+F5. Nie dodawaj drugiego zasobu tej samej karty.
+
+Sprawdzono składnię JavaScript, sześć testów logiki (`node --test tests/runtime.test.cjs`) oraz działanie w Chrome: dziesięć postaci w trybie stałym, zmianę losowej postaci, ruch nóg, niezależne lampki, zmianę girlandy, ograniczenie ruchu i szerokość 360 px. Obejrzano zrzuty scen i widoku mobilnego. Wersja nie została zainstalowana ani przetestowana w rzeczywistym Home Assistant lub na tablecie.
+
+Grafika `sanie-realistyczne-1.7.0.png` została wygenerowana narzędziem ImageGen z poleceniem: „Realistyczny Mikołaj w czerwono-złotych saniach ciągniętych przez jednego renifera; naturalne materiały i proporcje; widok z boku; przezroczyste tło; bez napisów i scenerii”. Pozostałe grafiki pochodzą z wcześniejszej wersji projektu.
+
+## Nowości w 1.6.0
+
+- Robot sprzątający liście imituje ruch szczotki, a nad stertą unoszą się liście. Robot i sterta przesuwają się po ekranie razem.
+- Lampki mają cztery efekty: stałe światło, migotanie, przechodzące światło i wspólne pulsowanie. Wybierz je w ustawieniach karty przy opcji „Efekt lampek”; można też ustawić w YAML `lights_effect: chase` (wartości: `steady`, `twinkle`, `chase`, `pulse`). Niezależny przełącznik lampek pozostał bez zmian.
+- Przy systemowym ograniczeniu ruchu lampki świecą stale, a efekty ruchu scen zostają wyłączone. Zmienione ustawienia w karcie są zapisywane w przeglądarce.
+- Sprawdzono składnię i logikę ustawień oraz zmiany trybów. Nie wykonano podglądu w przeglądarce ani w Home Assistant; należy sprawdzić wygląd i płynność na urządzeniu docelowym.
+
+## Nowości w 1.5.2
+
+- Nowe grafiki robotów 3D z dużą stertą liści i śniegu. Obie grafiki są osadzone w pliku JavaScript; nie trzeba przesyłać dodatkowych obrazów. Sceny przesuwają się po ekranie jako całość.
+- Weryfikacja: sprawdzono składnię i logikę ustawień. Nie udało się sprawdzić tej wersji wizualnie w przeglądarce ani w Home Assistant — prosimy przetestować obie sceny przyciskiem „Pokaż teraz”.
+
+## Poprawki w 1.5.1
+
+- Przerysowane roboty mają większe, bardziej szczegółowe obudowy i wyraźniejsze twarze. Sceny zawierają znacznie więcej liści i większą zaspę śniegu.
+
+## Nowości w 1.5.0
+
+- **Robot sprzątający liście** i **Robot odśnieżający** przejeżdżają wzdłuż dołu ekranu. Oba mają symbol Home Assistant. Kierunek, rozmiar i czas wizyty są regulowane tak jak dla pozostałych scen. Można je dodać do losowania.
+- **Lampki choinkowe** to osobna, niezależna dekoracja przy górnej krawędzi ekranu. W ustawieniach karty wybierz „Lampki choinkowe → Włączone niezależnie” i zapisz. Działają z dowolną sceną i także wtedy, gdy automatyczne animacje są wyłączone. Ich ustawienie jest lokalne dla przeglądarki albo można je ustawić bazowo w YAML: `lights: true`. Lampki pozostają widoczne do wyłączenia; nie korzystają z harmonogramu wizyt. Nie przechwytują kliknięć, a przy ograniczeniu ruchu świecą bez migania.
+- Wcześniej zapisane listy losowania pozostają bez zmian. Aby uwzględnić nowe roboty w istniejącej konfiguracji losowej, zaznacz je ręcznie.
+
+## Aktualizacja do 1.5.1
+
+1. W repozytorium domowe-animacje-card umieść w katalogu głównym pliki z paczki, w szczególności `domowe-animacje-card.js`, `README.md` i `hacs.json`.
+2. Zatwierdź zmianę na GitHubie. W HACS odśwież informacje i pobierz ponownie właściwą gałąź lub wydanie, a następnie odśwież przeglądarkę.
+3. Jeśli przeglądarka nadal pokazuje stary kod, zmień wersję istniejącego zasobu na `/hacsfiles/domowe-animacje-card/domowe-animacje-card.js?v=1.6.0` i odśwież stronę. Nie dodawaj drugiego zasobu.
+4. W ustawieniach wybierz robota i kliknij „Pokaż teraz”. Lampki włącz osobno i zapisz ustawienia. Sprawdź też działanie na tablecie.
 
 ## Nowości w 1.4.0
 

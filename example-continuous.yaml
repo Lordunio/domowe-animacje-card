@@ -1,0 +1,14 @@
+type: custom:domowe-animacje-card
+title: Domowe Animacje
+character: leafrobot
+display_mode: continuous
+size: 160
+duration: 14
+schedule_start: '00:00'
+schedule_end: '00:00'
+cleaner_particles: true
+cleaner_motion: true
+lights: true
+lights_effect: twinkle
+lights_layout: alternating
+lights_garland: true
