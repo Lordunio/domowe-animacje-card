@@ -16,12 +16,24 @@ test('old configuration migrates and new options reject invalid values',()=>{
  for(const patch of [{display_mode:'bad'},{lights_layout:'bad'},{lights_garland:'true'},{cleaner_particles:1},{cleaner_motion:null}])assert.throws(()=>normalize(patch));
  assert.equal(normalize({display_mode:'continuous',lights_layout:'alternating',lights_garland:true}).lights_garland,true);
 });
-test('all travelling scenes remain visible and inside the viewport in continuous mode',()=>{
+test('continuous passes always advance and reset beyond the viewport edges',()=>{
  const {normalize,planScene}=load();
  for(const width of [320,1280])for(const character of ['ghosts','robot2','santa','bunny','pumpkins','butterflies','cars','leafrobot','snowrobot'])for(const direction of ['left-to-right','right-to-left']){
   const items=planScene(normalize({character,direction,display_mode:'continuous',size:180}),width,740,false,()=>.5);
-  for(const item of items)for(const frame of item.frames){assert.equal(frame.opacity,1);const x=Number(frame.transform.match(/translate3d\(([^p]+)/)[1]);assert.ok(x>=0 && x+item.width<=width)}
+  for(const item of items){
+   const xs=item.frames.map(frame=>{assert.equal(frame.opacity,1);return Number(frame.transform.match(/translate3d\(([^p]+)/)[1])});
+   for(let i=1;i<xs.length;i++)assert.ok(direction==='left-to-right'?xs[i]>xs[i-1]:xs[i]<xs[i-1]);
+   if(direction==='left-to-right'){assert.ok(xs[0]+item.width<0);assert.ok(xs.at(-1)>width)}
+   else{assert.ok(xs[0]>width);assert.ok(xs.at(-1)+item.width<0)}
+  }
  }
+});
+test('reduced-motion continuous scenes remain static; interval visits retain fading edges',()=>{
+ const {normalize,planScene}=load();
+ const fixed=planScene(normalize({character:'santa',display_mode:'continuous'}),360,740,true,()=>.5)[0];
+ for(const frame of fixed.frames){assert.equal(frame.opacity,1);assert.equal(frame.transform,undefined)}
+ const visit=planScene(normalize({character:'santa',display_mode:'interval'}),360,740,false,()=>.5)[0];
+ assert.equal(visit.frames[0].opacity,0);assert.equal(visit.frames.at(-1).opacity,0);
 });
 test('continuous scheduler starts once, stops outside hours and resumes at next start',()=>{
  const {GhostRuntime,normalize,timers}=load(),rt=new GhostRuntime();let starts=0,stops=0;
@@ -44,4 +56,9 @@ test('art has four moving reindeer legs, spinning robot parts and dense particle
  assert.equal((cleanerSVG(false).match(/class="cleaner-particle leaf-particle"/g)||[]).length,42);
  assert.equal((cleanerSVG(true).match(/class="cleaner-particle snow-particle"/g)||[]).length,64);
  assert.ok(cleanerSVG(false).includes('cleaner-brush-spin'));
+});
+test('Santa dust stays under the sleigh and at four hoof positions in an expanded viewbox',()=>{
+ const {santaSVG}=load(),svg=santaSVG();
+ assert.equal((svg.match(/class="santa-dust-mote"/g)||[]).length,80);
+ assert.ok(svg.includes('class="santa-dust"'));assert.ok(svg.includes('viewBox="-25 -12 2023 947"'));
 });

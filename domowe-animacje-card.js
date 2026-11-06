@@ -1,4 +1,4 @@
-/* Domowe Animacje 1.7.0. MIT license. Includes generated raster artwork. */
+/* Domowe Animacje 1.7.1. MIT license. Includes generated raster artwork. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
@@ -122,7 +122,16 @@
     const defs = legs.map(([name,points])=>'<clipPath id="'+id+'-'+name+'"><polygon points="'+points+'"/></clipPath>').join('');
     const masks = legs.map(([,points])=>'<polygon points="'+points+'" fill="black"/>').join('');
     const moving = legs.map(([name,,x,y],i)=>'<g class="real-reindeer-leg stride-'+(i%2)+'" style="transform-origin:'+x+'px '+y+'px"><g clip-path="url(#'+id+'-'+name+')"><use href="#'+id+'-art"/></g></g>').join('');
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -12 2023 829"><defs><image id="'+id+'-art" width="1973" height="797" href="'+REALISTIC_SANTA+'"/>'+defs+'<mask id="'+id+'-body" maskUnits="userSpaceOnUse" x="-25" y="-12" width="2023" height="829"><rect x="-25" y="-12" width="2023" height="829" fill="white"/>'+masks+'</mask></defs>'+moving+'<use href="#'+id+'-art" mask="url(#'+id+'-body)"/></svg>';
+    const dust = Array.from({length:80},(_,i)=>{
+      const hoof=i>=48, n=hoof?i-48:i;
+      const points=[[1110,748],[1085,700],[1635,655],[1875,685]], anchor=points[n%4];
+      const x=hoof?anchor[0]+(Math.floor(n/4)%4-1.5)*23:100+(n*71)%890;
+      const y=hoof?anchor[1]+20+Math.floor(n/4)*5:802+(n*17)%56;
+      const r=3+(i%5)*1.1;
+      const shape=i%4===0?'<path d="M0-10 2.8-2.8 10 0 2.8 2.8 0 10-2.8 2.8-10 0-2.8-2.8Z" fill="#fff4b8"/>':'<circle r="'+r+'" fill="#fff5cd"/>';
+      return '<g transform="translate('+x+' '+y+')"><g class="santa-dust-mote" style="animation-delay:-'+(i*.137)+'s;animation-duration:'+(1.6+(i%5)*.18)+'s"><circle r="'+r*3+'" fill="#ffc454" opacity=".18"/>'+shape+'</g></g>';
+    }).join('');
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -12 2023 947"><defs><image id="'+id+'-art" width="1973" height="797" href="'+REALISTIC_SANTA+'"/>'+defs+'<mask id="'+id+'-body" maskUnits="userSpaceOnUse" x="-25" y="-12" width="2023" height="829"><rect x="-25" y="-12" width="2023" height="829" fill="white"/>'+masks+'</mask></defs>'+moving+'<use href="#'+id+'-art" mask="url(#'+id+'-body)"/><g class="santa-dust" aria-hidden="true">'+dust+'</g></svg>';
   }
   function bunnySVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" fill="none">
@@ -282,7 +291,7 @@
     return ({ghosts:ghostSVG,robot:robotSVG,robot2:robot2SVG,santa:santaSVG,bunny:bunnySVG,pumpkins:pumpkinSVG,butterflies:butterflySVG,cars:carSVG,leafrobot:()=>cleanerSVG(false),snowrobot:()=>cleanerSVG(true),random:robotSVG}[kind] || ghostSVG)(index);
   }
   // Aspect ratio of each artwork, so the header icon keeps its proportions.
-  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:2023/829,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,leafrobot:2,snowrobot:2,random:1};
+  const ART_RATIO = {ghosts:150/172,robot:240/280,robot2:240/260,santa:2023/947,bunny:220/250,pumpkins:200/190,butterflies:180/160,cars:320/150,leafrobot:2,snowrobot:2,random:1};
   function randomIconSVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
       <g fill="#ffd98a"><path d="m18 31 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z"/><path d="m99 24 2-6 2 6 6 2-6 2-2 6-2-6-6-2Z"/></g>
@@ -359,6 +368,9 @@
     .cleaner-brush { transform-box:fill-box;transform-origin:center;animation:brush-wiggle .25s ease-in-out infinite alternate; }
     @keyframes brush-wiggle { from{transform:rotate(-3deg)} to{transform:rotate(3deg)} }
 
+    .santa-dust-mote { opacity:0;transform-box:view-box;animation:santa-dust-drift 2s linear infinite; }
+    @keyframes santa-dust-drift { 0%{opacity:0;transform:translate(8px,-7px) scale(.35)} 18%{opacity:.95} 50%{opacity:.8;transform:translate(-42px,9px) scale(1)} 100%{opacity:0;transform:translate(-105px,34px) scale(.18)} }
+    @media(prefers-reduced-motion:reduce) { .traveller .santa-dust-mote { opacity:.65;transform:none; } }
     .real-reindeer-leg { transform-box:view-box;animation:real-stride .72s ease-in-out infinite alternate; }
     .real-reindeer-leg.stride-1 { animation-direction:alternate-reverse; }
     @keyframes real-stride { from{transform:rotate(-10deg)}to{transform:rotate(12deg)} }
@@ -374,7 +386,7 @@
   function planScene(config,width,height,reduced=false,random=Math.random) {
     const kind = config.character;
     const count = ['ghosts','butterflies','cars','pumpkins'].includes(kind) ? config.ghosts : 1;
-    const ratio = {ghosts:172/150,santa:829/2023,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200,leafrobot:0.5,snowrobot:0.5}[kind];
+    const ratio = {ghosts:172/150,santa:947/2023,bunny:250/220,butterflies:160/180,cars:150/320,robot2:260/240,pumpkins:190/200,leafrobot:0.5,snowrobot:0.5}[kind];
     const reverse = config.direction === 'right-to-left' || (config.direction === 'random' && random()>.5);
     const scale = {ghosts:1,santa:3,bunny:1.05,butterflies:.7,cars:1.55,robot2:1,pumpkins:1.05,leafrobot:3.1,snowrobot:3.1}[kind];
     const airborne = ['ghosts','santa','butterflies','robot2'].includes(kind);
@@ -399,8 +411,10 @@
           return {transform:`translate3d(${x}px,${y+dy}px,0)`,opacity:index===0||index===4 ? 0 : 1,offset:t};
         });
       if(config.display_mode === 'continuous') {
-        const start = reverse ? width-w-12 : 12, end = reverse ? 12 : width-w-12;
-        frames.splice(0,frames.length,...(reduced ? [{opacity:1},{opacity:1}] : [0,.25,.5,.75,1].map(t=>({transform:'translate3d('+(start+(end-start)*t)+'px,'+(y+(airborne?Math.sin(t*Math.PI*2+i)*8:0))+'px,0)',opacity:1,offset:t}))));
+        // Repeat a forward pass from beyond one edge to beyond the other edge.
+        // Reset only while fully off-screen; never reverse a travelling character.
+        if(reduced) frames.splice(0,frames.length,{opacity:1},{opacity:1});
+        else for(const frame of frames) frame.opacity=1;
       }
       items.push({kind,index:i,width:w,height:h,y,staticX,reverse,duration,delay,frames});
     }
@@ -559,7 +573,7 @@
         node.innerHTML = '<div class="flip" style="transform:scaleX('+(item.reverse ? -1 : 1)+')"><div class="art">'+sceneSVG(item.kind,item.index)+'</div></div>' +
           (text ? '<div class="caption">'+escapeHTML(text)+'</div>' : '');
         root.append(node);
-        this.animations.push(node.animate(item.frames,{duration:item.duration,delay:continuous?0:item.delay,fill:'both',easing:'linear',iterations:continuous?Infinity:1,direction:continuous?'alternate':'normal'}));
+        this.animations.push(node.animate(item.frames,{duration:item.duration,delay:item.delay,fill:'both',easing:'linear',iterations:continuous?Infinity:1,direction:'normal'}));
         finish = Math.max(finish,item.duration+item.delay);
       }
       document.body.append(layer);this.layer = layer;
@@ -720,7 +734,7 @@
         <p class="status" aria-live="polite"></p>
         <details><summary>Ustawienia</summary>
           <form><fieldset><div class="fields">${FORM_FIELDS}</div>
-            <p class="hint">Tryb „Stale” pokazuje postać bez przerw w aktywnych godzinach. W losowaniu zmienia postać po czasie wyświetlania. Jednakowe odstępy = stała częstotliwość. Jednakowe godziny = cała doba. Ustawienia zapisują się w tej przeglądarce.</p>
+            <p class="hint">Tryb „Stale” powtarza przejazdy od krawędzi w aktywnych godzinach, bez cofania. W losowaniu zmienia postać po czasie wyświetlania. Jednakowe odstępy = stała częstotliwość. Jednakowe godziny = cała doba. Ustawienia zapisują się w tej przeglądarce.</p>
             <div class="form-actions"><button class="save" type="submit">Zapisz ustawienia</button><button class="reset" type="button">Przywróć z YAML</button></div>
           </fieldset><p class="notice" role="status" aria-live="polite"></p></form>
         </details>
@@ -768,7 +782,7 @@
       button.textContent = runtime.enabled ? 'Wyłącz animacje' : 'Włącz animacje';
       let status = 'Automatyczne animacje są wyłączone. Możesz przetestować postać.';
       if (this.preview) status = 'Podgląd karty. Ustawienia włączysz po zapisaniu karty.';
-      else if(runtime.enabled && config.display_mode==='continuous' && !document.hidden && inHours(new Date(),config)) status = runtime.reduced.matches ? 'Postać stale widoczna. System ogranicza ruch.' : 'Postać stale widoczna — bez przerw między wizytami.';
+      else if(runtime.enabled && config.display_mode==='continuous' && !document.hidden && inHours(new Date(),config)) status = runtime.reduced.matches ? 'Postać stale widoczna. System ogranicza ruch.' : 'Ciągłe przejścia — kolejny przejazd od krawędzi, bez cofania.';
       else if (runtime.enabled && runtime.reduced.matches) status = 'System ogranicza ruch. Automatyczne animacje są wstrzymane.';
       else if (runtime.enabled && runtime.next) status = `Następna wizyta: ${runtime.next.toLocaleString('pl-PL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}.`;
       else if (runtime.enabled) status = 'Animacje są wstrzymane, gdy zakładka jest w tle.';

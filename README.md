@@ -1,6 +1,16 @@
-# Domowe Animacje 1.7.0
+# Domowe Animacje 1.7.1
 
 Dziesięć animacji do pulpitu Home Assistanta, w tym robot sprzątający liście i robot odśnieżający: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Kod JavaScript, rysunki SVG i osadzone grafiki PNG, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Poprawki w 1.7.1
+
+Weryfikacja: 8 testów logiki oraz testy Chrome; 34 przejazdy w obu kierunkach i kolejnych pętlach, ruch pyłu, zapis przez formularz, tryb losowy, lampki i widok mobilny. Brak błędów JavaScript. Wersja nie została automatycznie zainstalowana w HA ani opublikowana na GitHubie.
+
+- W trybie stałym postacie przechodzą przez ekran tylko do przodu. Po całkowitym wyjściu poza ekran rozpoczynają kolejny przejazd od przeciwnej krawędzi. Nie wracają już na wstecznym. Wybrany kierunek ruchu jest respektowany. Machający robocik nadal pozostaje w rogu.
+- Pod saniami Mikołaja i kopytami renifera pojawia się ciepły, świetlisty pył: 80 drobinek z poświatą, migotaniem i krótkim śladem. Pył jest częścią tej samej sceny i odbija się razem z nią przy zmianie kierunku.
+- Systemowe ograniczenie ruchu pozostawia statyczną postać i delikatne drobinki zamiast ruchomego pyłu.
+- Przed podmianą plików w HA zachowaj kopię. Jeśli katalog zawiera plik `domowe-animacje-card.js.gz`, podmień również tę kopię — stary plik gzip może być serwowany zamiast nowego JavaScript. Paczka zawiera zgodną, gotową kopię gzip.
+- Po aktualizacji zmień parametr istniejącego zasobu na `?v=1.7.1` i odśwież cały panel. Nie dodawaj drugiego zasobu tej samej karty.
 
 ## Nowości w 1.7.0
 
