@@ -1,4 +1,4 @@
-/* Domowe Animacje 1.7.1. MIT license. Includes generated raster artwork. */
+/* Domowe Animacje 1.7.2. MIT license. Includes generated raster artwork. */
 (() => {
   'use strict';
   const TAG = 'domowe-animacje-card', LEGACY_TAG = 'white-ghosts-card', KEY = 'white-ghosts-card:v1';
@@ -112,15 +112,37 @@
   let artSequence = 0;
   function santaSVG() {
     const id = 'santa-' + (++artSequence);
-    // Keep each leg as a masked part of the approved artwork; the torso covers its joint.
+    // Four non-overlapping leg regions; their union is removed from the fixed image.
+    // The shared cut follows the gap between each near/far pair, including every hoof.
     const legs = [
-      ['hind-far','1200 520 1325 520 1240 625 1112 729 1048 710 1115 624 1160 553',1250,520],
-      ['hind-near','1300 520 1410 520 1304 637 1138 760 1082 744 1147 642 1226 559',1350,520],
-      ['front-far','1640 518 1740 518 1780 553 1711 619 1645 668 1598 645 1636 600 1690 555',1700,518],
-      ['front-near','1700 508 1770 508 1822 541 1898 638 1904 698 1861 682 1778 569 1700 557',1730,508]
-    ];
+  [
+    "hind-far",
+    "1052 505 1300 505 1250 550 1217 560 1203 575 1195 590 1190 600 1185 610 1178 625 1170 640 1164 650 1140 665 1115 680 1085 695 1080 710 1052 715",
+    1270,
+    505
+  ],
+  [
+    "hind-near",
+    "1300 505 1440 505 1440 605 1230 660 1180 725 1080 780 1080 710 1085 695 1115 680 1140 665 1164 650 1170 640 1178 625 1185 610 1190 600 1195 590 1203 575 1217 560 1250 550 1300 505",
+    1380,
+    510
+  ],
+  [
+    "front-far",
+    "1570 535 1660 520 1700 505 1760 540 1772 550 1778 575 1768 610 1760 625 1740 650 1580 675 1560 630",
+    1660,
+    525
+  ],
+  [
+    "front-near",
+    "1700 485 1790 485 1830 535 1905 620 1910 710 1835 710 1800 660 1740 650 1760 625 1768 610 1778 575 1772 550 1760 540 1700 505",
+    1690,
+    505
+  ]
+];
     const defs = legs.map(([name,points])=>'<clipPath id="'+id+'-'+name+'"><polygon points="'+points+'"/></clipPath>').join('');
-    const masks = legs.map(([,points])=>'<polygon points="'+points+'" fill="black"/>').join('');
+    const joints = '<clipPath id="'+id+'-joints"><path d="M1200 475H1450V535Q1385 557 1320 565Q1250 560 1200 550ZM1540 470H1735V530Q1700 555 1640 562Q1580 565 1540 550Z"/></clipPath>';
+    const masks = legs.map(([,points])=>'<polygon points="'+points+'" fill="black" stroke="black" stroke-width="2"/>').join('');
     const moving = legs.map(([name,,x,y],i)=>'<g class="real-reindeer-leg stride-'+(i%2)+'" style="transform-origin:'+x+'px '+y+'px"><g clip-path="url(#'+id+'-'+name+')"><use href="#'+id+'-art"/></g></g>').join('');
     const dust = Array.from({length:80},(_,i)=>{
       const hoof=i>=48, n=hoof?i-48:i;
@@ -131,7 +153,7 @@
       const shape=i%4===0?'<path d="M0-10 2.8-2.8 10 0 2.8 2.8 0 10-2.8 2.8-10 0-2.8-2.8Z" fill="#fff4b8"/>':'<circle r="'+r+'" fill="#fff5cd"/>';
       return '<g transform="translate('+x+' '+y+')"><g class="santa-dust-mote" style="animation-delay:-'+(i*.137)+'s;animation-duration:'+(1.6+(i%5)*.18)+'s"><circle r="'+r*3+'" fill="#ffc454" opacity=".18"/>'+shape+'</g></g>';
     }).join('');
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -12 2023 947"><defs><image id="'+id+'-art" width="1973" height="797" href="'+REALISTIC_SANTA+'"/>'+defs+'<mask id="'+id+'-body" maskUnits="userSpaceOnUse" x="-25" y="-12" width="2023" height="829"><rect x="-25" y="-12" width="2023" height="829" fill="white"/>'+masks+'</mask></defs>'+moving+'<use href="#'+id+'-art" mask="url(#'+id+'-body)"/><g class="santa-dust" aria-hidden="true">'+dust+'</g></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -12 2023 947"><defs><image id="'+id+'-art" width="1973" height="797" href="'+REALISTIC_SANTA+'"/>'+defs+joints+'<mask id="'+id+'-body" maskUnits="userSpaceOnUse" x="-25" y="-12" width="2023" height="829"><rect x="-25" y="-12" width="2023" height="829" fill="white"/>'+masks+'</mask></defs>'+moving+'<use href="#'+id+'-art" mask="url(#'+id+'-body)"/><use class="reindeer-joints" href="#'+id+'-art" clip-path="url(#'+id+'-joints)"/><g class="santa-dust" aria-hidden="true">'+dust+'</g></svg>';
   }
   function bunnySVG() {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" fill="none">
@@ -373,7 +395,7 @@
     @media(prefers-reduced-motion:reduce) { .traveller .santa-dust-mote { opacity:.65;transform:none; } }
     .real-reindeer-leg { transform-box:view-box;animation:real-stride .72s ease-in-out infinite alternate; }
     .real-reindeer-leg.stride-1 { animation-direction:alternate-reverse; }
-    @keyframes real-stride { from{transform:rotate(-10deg)}to{transform:rotate(12deg)} }
+    @keyframes real-stride { from{transform:rotate(-8deg)}to{transform:rotate(8deg)} }
     .cleaner-wheel { animation:car-wheel 1.9s linear infinite; }
     .cleaner-brush-spin { transform-box:view-box;transform-origin:0 0;animation:car-wheel .85s linear infinite; }
     .cleaner-particle { opacity:0;animation:cleaner-leaves 4.1s ease-in-out infinite; }

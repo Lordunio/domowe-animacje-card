@@ -1,6 +1,14 @@
-# Domowe Animacje 1.7.1
+# Domowe Animacje 1.7.2
 
 Dziesięć animacji do pulpitu Home Assistanta, w tym robot sprzątający liście i robot odśnieżający: duszki, machający i latający robocik, Mikołaj z saniami, wielkanocny króliczek, straszne dynie, motylki oraz wyścigówki. Do każdej sceny możesz dodać własny napis. Tryb losowy pozwala zaznaczyć, które sceny mają się pojawiać. Kod JavaScript, rysunki SVG i osadzone grafiki PNG, bez zewnętrznych bibliotek i pobierania multimediów.
+
+## Poprawki w 1.7.2
+
+- Naprawiono podział nóg renifera na warstwy. Nieruchomy obraz nie zachowuje już resztek kopyt, a fragmenty jednej nogi nie trafiają do drugiej warstwy.
+- Dwie tylne i dwie przednie nogi mają osobne, rozłączne maski. Dodatkowa warstwa tułowia zakrywa miejsca połączenia podczas ruchu.
+- Obejrzano cztery fazy animacji w powiększeniu. Osobno wyrenderowano tułów i każdą nogę; sprawdzono brak kopyt w tułowiu, obecność każdego kopyta tylko w jego warstwie oraz poprawne przypisanie 1609 próbek pikseli z kończyn.
+- Testy ruchu i ustawień w Chrome oraz 8 testów logiki przeszły. Wcześniejsze sprawdzenie wersji 1.7.1 nie wychwyciło błędu wyglądu; ta poprawka uzupełnia kontrolę warstw i klatek.
+- Przy aktualizacji użyj parametru zasobu `?v=1.7.2` i podmień również zgodny plik `.js.gz`.
 
 ## Poprawki w 1.7.1
 
